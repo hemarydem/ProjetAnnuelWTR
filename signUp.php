@@ -1,6 +1,6 @@
 <?php
  try{
-    $bdd = new PDO('mysql:host=localhost:8889;dbname=EspaceMembre', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    $bdd = new PDO('mysql:host=51.178.51.247;dbname=ProjetAnnuel', 'esgi', 'EE7tM6d9bd5R', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
  }
  catch(Exeption $e){
     die('Error: ' . $e->getMessage);
@@ -271,6 +271,7 @@ if(isset($_POST['signInForm'])) {
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
+            <input type="text" name="passWord" placeholder="mot de passe">
             <input type="submit" name="signInForm" >
         </form>
         <?php
