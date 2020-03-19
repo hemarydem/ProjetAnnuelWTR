@@ -1,0 +1,12 @@
+/*______USER LIST__________________________________________*/
+
+td,th{
+	width: 150px;
+	border: solid thin grey;
+	padding : 0.5em;
+}
+
+th{
+	background-color: grey;
+	color: white;
+}

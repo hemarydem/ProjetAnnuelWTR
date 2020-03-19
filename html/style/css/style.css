@@ -1,0 +1,42 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0px;
+	font-family: Helvetica;
+	background-color: #303841;
+	color : #eeeeee;
+}
+
+*{
+	box-sizing: border-box;
+}
+
+a{
+	text-decoration: none;
+	color : #ecf0f1;
+}
+
+
+
+/*________________________________________________*/
+
+
+
+.big{
+	font-size: 44px;
+	text-align: center;
+}
+
+
+/*_____________ FORUM_____________*/
+
+#body_forum{
+
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 10%;
+
+}
+
