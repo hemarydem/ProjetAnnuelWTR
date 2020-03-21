@@ -3,25 +3,25 @@ removeElement = (idContaineur) => {
     div.innerHTML = "";
 }
 emailChange = () => {
-	let oldEmail = document.getElementById('userEmail').innerHTML;
-	console.log('contenue de oldEmail = '+ oldEmail);
-	let newMail = document.getElementById('newMail').value;
-	console.log('newEmail = ' + newmail);
-	let request1 = new XMLHttpRequest();  
-	request1.onreadystatechange = function() {
-		if(request1.readyState == 4) {
-			if(request1.status == 200) {
+	let request = new XMLHttpRequest();  
+	let actualMail = document.getElementById('userEmail').innerHTML;
+	console.log(actualMail);
+	let inputMail =  document.getElementById('newMail').value;
+	console.log(inputMail);
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
 				removeElement('userEmail');
-				let containeur = document.getElementById('userEmail');
-				console.log('une fois la requet effectué containeur = ' + containeur);
-				console.log( 'response =' +request1.responseText);
-                containeur.innerHTML = request1.responseText;
+				let divEmail =  document.getElementById('userEmail');
+				console.log(divEmail);
+				divEmail.innerHTML = request.responseText;
+				console.log(divEmail);
 			} else {
-				alert("Error: returned status code " + request1.status + " " + request1.statusText);
+				alert("Error: returned status code " + request.status + " " + request.statusText);
 			}
 		}
 	}
-	request1.open("POST", "usersEmailProcess.php", true);
-	request1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	request1.send(`newEmail=${newMail}&oldEmail=${oldEmail}`);
+	request.open("POST", "usersEmailProcess.php", true);    
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	request.send(`newEmail=${inputMail}&oldEmail=${actualMail}`);
 }
