@@ -9,9 +9,7 @@
 				<li><a href="#">Groupes d'énigmes</a> </li>
 				<li><a href="#">Concours</a> </li>
 				<?php
-					if(isset($_SESSION['login']) && $_SESSION['login'] == 'administrateur') {
-						echo '<li><a href = "http://localhost:8888/html/Administration/searchUser.php">searchUser</a></li>';
-					}
+					
 					if(isset($_SESSION['pseudo'])){
 						echo '
 
@@ -25,6 +23,9 @@
 					}else {
 						echo '<li><a href="http://localhost:8888/html/sign/signIn/signIn.php">Connexion</a></li>';
 						echo '<li><a href="http://localhost:8888/html/sign/signUp/signUp.php">Inscription</a></li>';
+					}
+					if(isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == 'administrateur') {
+						echo '<li><a href = "http://localhost:8888/html/Administration/searchUser.php">searchUser</a></li>';
 					}
 				?>
 			</section>
