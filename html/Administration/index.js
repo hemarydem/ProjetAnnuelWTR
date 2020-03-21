@@ -13,7 +13,7 @@ printResponsJson = () => {
     let tr =  document.createElement('tr');
     tr.id ='containeur';
     table.appendChild(tr);
-    const arrayTitle = ['date de création', 'pseudo', 'Email', 'actif', 'activer', 'désactiver'];
+    const arrayTitle = ['date de création', 'pseudo', 'Email', 'Etat'];
     tr = document.getElementById('containeur');
     const arrayTh = [];
     for(let index = 0; index < arrayTitle.length; index++) {
