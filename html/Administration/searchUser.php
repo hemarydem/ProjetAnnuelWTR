@@ -6,6 +6,9 @@
     <title>searchUser</title>
 </head>
 <body>
+    <?php
+        include('includes/header.php');
+    ?>
     <div> 
         <input type = "text" name = "wantedUser" id="searchByMail" placeholder="write the user's mail">
         <button onclick="searchUserByMail()">search</button>

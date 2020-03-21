@@ -21,7 +21,7 @@
 		if( $results[0]['working'] == 1){	//activé
 			session_start();
 			$_SESSION['pseudo'] = $login;
-			header('location:https://thomerlas.online');
+			header('location:http://localhost:8888/html/index.php');
 			exit;
 		}else{	//non activé
 			header('location:signIn.php?msg=Compte non activé');

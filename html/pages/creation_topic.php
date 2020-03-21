@@ -22,7 +22,7 @@
           	$titleTopic = htmlspecialchars($_POST['title']);
 						$contentTopic = htmlspecialchars($_POST['content']);
 						
-						if(!empty($_POST['title'] and !empty($_POST['content'])){
+						if(!empty($_POST['title']) and !empty($_POST['content'])){
 						$insertTopic = $bdd->prepare("INSERT INTO topic(title, content) VALUES (:title, :content)");
 						$insertTopic->execute(array('title'=>$titleTopic, 'content'=>$contentTopic));
 						$message = "Votre topic a été ajouté";

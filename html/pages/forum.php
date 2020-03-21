@@ -20,7 +20,7 @@
 				while($topic=$req->fetch()) {?>
 					<div class="topic">
 						<h4><?= $topic['title'];?></h4>
-						<a href="https://Thomarlas.online/pages/page_topic?topic=<?= $topic['id'] ?>">Plus</a>
+						<a href="http://localhost:8888/html/pages/page_topic?topic=<?= $topic['id'] ?>">Plus</a>
 					</div>
 				<?php } ?>
       </section>

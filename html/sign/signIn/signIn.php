@@ -13,8 +13,8 @@
 	<body>
 
 		<header >
-					<a class="headerLogo flex" style="justify-content: center" href="https://thomerlas.online">
-						<img src="https://thomerlas.online/img/logo/ThomerlasWhite.svg" alt="logo" height="130px">
+					<a class="headerLogo flex" style="justify-content: center" href="http://localhost:8888/html/index.php">
+						<img src="http://localhost:8888/html/img/logo/ThomerlasWhite.svg" alt="logo" height="130px">
 						<h1>Thomerlas</h1>
 					</a>
 		</header>
@@ -34,7 +34,7 @@
 				</section>
 				<section class="formBottom">
 					<input class="formButton" type="submit" name="submit" value="Connexion"><br>
-					<a href="https://thomerlas.online/sign/signUp/signUp.php">Pas de compte ? S'inscrire</a><br>
+					<a href="http://localhost:8888/html/index.phpsign/signUp/signUp.php">Pas de compte ? S'inscrire</a><br>
 					<a href="#">Mot de passe oublié</a>
 				</section>
 			</form>
