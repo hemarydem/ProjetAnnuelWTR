@@ -32,7 +32,7 @@ if(isset($_GET['email'])) {
         <div class="profilContain" id="divMail">
             <h2>email :</h2><h3 id = 'userEmail'> <?php echo $results[0]['email'];?></h3>
             <input type="text" id="newMail" placeholder="nouvelle adresse mail"> 
-            <button onclick=emailChange()>changer</button>
+            <button onclick="emailChange()">Click me</button>
             <h1>test</h1>
             <form method="post" action="usersEmailProcess.php">
                 <input type="text" name="oldEmail" placeholder="vieux">

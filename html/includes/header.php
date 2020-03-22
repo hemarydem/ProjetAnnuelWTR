@@ -23,6 +23,9 @@
 						echo '<li><a href="signIn.php">Connexion</a></li>';
 						echo '<li><a href="signUp.php">Inscription</a></li>';
 					}
+					if(isset($_SESSION['pseudo'])) {
+						echo '<li><a href="Administration/searchUser.php">Administration</a></li>';
+					}
 				?>
 			</section>
 

@@ -3,6 +3,7 @@ function removeElement(idContaineur) {
     div.innerHTML = "";
 }
 function emailChange () {
+	let chekVar = 'ok';
 	let actualMail = document.getElementById('userEmail').innerHTML;
 	console.log(actualMail);
 	const inputMail =  document.getElementById('newMail').value;
@@ -11,10 +12,11 @@ function emailChange () {
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
-				removeElement('userEmail');
-				let divEmail =  document.getElementById('userEmail');
+				//removeElement('userEmail');
+				let divEmail = document.getElementById('userEmail');
 				console.log(divEmail);
 				console.log('responseText = ' + request.responseText);
+				console.log('response = ' + request.response);
 				divEmail.innerHTML = request.responseText;
 				console.log(request.responseText);
 				//emailInsert(inputMail);

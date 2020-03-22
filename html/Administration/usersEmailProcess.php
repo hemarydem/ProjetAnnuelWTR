@@ -1,28 +1,15 @@
 <?php 
 require('../includes/config.php');
-//request.send(`newEmail=${inputMail}&oldEmail=${actualMail}`);
-if(isset($_POST['newEmail']) && isset($_POST['oldEmail'])){
-    $data = $_POST['oldEmail'];
-    $q = 'SELECT email, login FROM USERS WHERE email = ? ';
+if(isset($_POST['newEmail']) &&  isset($_POST['oldEmail'])){
+    $q = 'UPDATE USERS SET EMAIL= ? WHERE EMAIL = ?';											
     $req = $bdd->prepare($q);
-    $req->execute([$data]);
-    $result = $req->fetchAll(PDO::FETCH_ASSOC);
-    echo $result[0]['email'].'<br>';
-    //echo $result[0]['login'].'<br>';
-    
-    //$data = $result[0]['login'];
-    $newMail = $_POST['newEmail'];
-    $q2 = 'UPDATE USERS SET email =?  WHERE login = ? ';
-    $req2 = $bdd->prepare($q2);
-    $req2->execute([$newMail,$data]);
-
-    $data = $_POST['newEmail'];
-    $q = 'SELECT email, login FROM USERS WHERE email = ? ';
+    $req->execute([$_POST['newEmail'],$_POST['oldEmail']]);
+    $q = 'SELECT EMAIL FROM USERS WHERE EMAIL = ?';
     $req = $bdd->prepare($q);
-    $req->execute([$data]);
+    $req->execute([$_POST['newEmail']]);
     $result = $req->fetchAll(PDO::FETCH_ASSOC);
-    //echo 'après update'.'<br>';
-    echo $result[0]['email'];
-    //echo $result[0]['login'].'<br>';
+    foreach($result as $key => $value) {
+        echo $value['EMAIL']; 
+    }
 }
 ?>
