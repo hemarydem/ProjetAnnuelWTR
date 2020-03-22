@@ -1,21 +1,23 @@
-removeElement = (idContaineur) => {
+function removeElement(idContaineur) {
 	const div = document.getElementById(idContaineur);
     div.innerHTML = "";
 }
-emailChange = () => {
-	let request = new XMLHttpRequest();  
+function emailChange () {
 	let actualMail = document.getElementById('userEmail').innerHTML;
 	console.log(actualMail);
-	let inputMail =  document.getElementById('newMail').value;
+	const inputMail =  document.getElementById('newMail').value;
 	console.log(inputMail);
+	let request = new XMLHttpRequest();  
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
 				removeElement('userEmail');
 				let divEmail =  document.getElementById('userEmail');
 				console.log(divEmail);
+				console.log('responseText = ' + request.responseText);
 				divEmail.innerHTML = request.responseText;
-				console.log(divEmail);
+				console.log(request.responseText);
+				//emailInsert(inputMail);
 			} else {
 				alert("Error: returned status code " + request.status + " " + request.statusText);
 			}

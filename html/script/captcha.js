@@ -123,6 +123,7 @@ window.onload = function(){
 	// Envoyer les x et y au php
 		function sendPosition(position){
 			let xhr = new XMLHttpRequest();
+			xhr.open("POST", "includes/positionValidator.php", true);
 
 			xhr.onreadystatechange = function(){
 				if(this.readyState == 4 && this.status == 200){
@@ -132,7 +133,7 @@ window.onload = function(){
 				}
 			};
 
-			xhr.open("POST", "../../includes/positionValidator.php", true);
+
 			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			xhr.send("position=" + position);
 

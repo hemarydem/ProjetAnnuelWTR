@@ -34,28 +34,28 @@
 
 	//letter
 	$color = $colors[array_rand($colors)];
-	$font = '../../style/fonts/' . $fonts[array_rand($fonts)];
+	$font = 'style/fonts/' . $fonts[array_rand($fonts)];
 	$size = $sizes[array_rand($sizes)];
 	$angle = $angles[array_rand($angles)];
 	imagettftext($position, $size, $angle, 5, 40, $color, $font, $letter);
 
 	//digit
 	$color = $colors[array_rand($colors)];
-	$font = '../../style/fonts/' . $fonts[array_rand($fonts)];
+	$font = 'style/fonts/' . $fonts[array_rand($fonts)];
 	$size = $sizes[array_rand($sizes)];
 	$angle = $angles[array_rand($angles)];
 	imagettftext($position, $size, $angle, 35, 40, $color, $font, $digit);
 
 	$_SESSION['position'] = $string;
 
-	imagepng($position, '../../img/captcha/position.png');
+	imagepng($position, 'img/captcha/position.png');
 
 
  ?>
  <div id="captchaContainer">
- 	<p>Déplacez M. Sananes en</p><img src="../../img/captcha/position.png" alt="position">
- 	<img id="pawn" src="../../img/captcha/Frederic_Sananes.png">
- 	<img id="chessboard" src="../../img/captcha/chessboard.svg">
+ 	<p>Déplacez M. Sananes en</p><img src="img/captcha/position.png" alt="position">
+ 	<img id="pawn" src="img/captcha/Frederic_Sananes.png">
+ 	<img id="chessboard" src="img/captcha/chessboard.svg">
  	<div id="chessboardBG">
  		<canvas id="captcha">échiquier</canvas>
  	</div>
