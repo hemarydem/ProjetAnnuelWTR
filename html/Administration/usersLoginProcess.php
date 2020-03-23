@@ -10,8 +10,12 @@
     $reqOne->execute([
         'newLogin' => $newPseudo,
         'mail' => $mail
-    ]);  
-    header('location: UserProfile.php');
+    ]);
+    
+    $qtwo = 'SELECT email FROM USERS WHERE email = :mail';
+    $reqTwo = $bdd->prepare($qtwo);
+    $reqTwo->execute(['mail' => $mail]);
+    header('location: UserProfile.php?mail='.$mail);
     exit;
 }else {
     echo 'data fail to update';
