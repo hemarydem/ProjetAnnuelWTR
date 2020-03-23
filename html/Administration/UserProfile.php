@@ -10,7 +10,6 @@ if(isset($_GET['email'])) {
     header('location: searchUser.php');
     exit;
 }
-$_SESSION['']
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,21 +54,20 @@ $_SESSION['']
             <!--<button onclick=modeStatChange()>changer</button>-->
             <form method="post" action="usersModeratorStatusProcess.php">
                <?php
-               echo '<input type="text" name="mail" value="'.$results[0]['email'].'" >
-                    <input type="text" name="moderator" value="'.$results[0]['moderator'].'">';?>
+               echo '<input type="text" name="mail" value="'.$results[0]['email'].'" >';?>
                 <input type="submit">
             </form>
         </div>
 
         <div class="profilContain" id="divActivate">
-            <h2 class="profilContainTitle">activate </h2> <h3 id = 'userActiveState'><?php echo $results[0]['working'];?></h3>
-            <input type="text" id="" placeholder="nouvelle adresse mail"> 
-            <button onclick=turnOnOff()>changer</button>
-            <form method="post" action="usersLoginProcess.php">
-               <?php echo '<input type="text" name="mail" placeholder="vieux mail" value="'.$results[0]['email'].'" >';?>
-                <input type="text" name="newLogin" placeholder="nouveaux Pseudo" >
+            <h2 class="profilContainTitle">active </h2> <h3 id = 'moderatorStatus'><?php echo $results[0]['working'];?></h3>
+            <!--<button onclick=modeStatChange()>changer</button>-->
+            <form method="post" action="usersactiveProcess.php">
+               <?php
+               echo '<input type="text" name="mail" value="'.$results[0]['email'].'" >';?>
                 <input type="submit">
             </form>
+        </div>
             
         </div>
         <div class="profilContain" id="divLevel">
