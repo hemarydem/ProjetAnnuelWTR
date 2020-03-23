@@ -1,5 +1,5 @@
 <?php
-	//session_start();
+	session_start();
 	require('includes/config.php');
 ?>
 
@@ -17,7 +17,10 @@
 			<section>
 				<p>Filtres</p>
 			</section>
+
 			<?php
+
+
 			$q = 'SELECT title,description FROM ENIGMA';
 			$req = $bdd->query($q);
 			$results = $req->fetchAll(PDO::FETCH_ASSOC);

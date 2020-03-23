@@ -18,13 +18,14 @@
 									<li ><a href="signOut.php">Déconnexion</a></li>
 								</ul>
 							</li>
+						
 						';
+						if( $_SESSION['pseudo'] == 'administrateur' ){
+							echo '<li><a href="admin.php">admin</a> </li>';		
+						}
 					}else {
 						echo '<li><a href="signIn.php">Connexion</a></li>';
 						echo '<li><a href="signUp.php">Inscription</a></li>';
-					}
-					if(isset($_SESSION['pseudo'])) {
-						echo '<li><a href="Administration/searchUser.php">Administration</a></li>';
 					}
 				?>
 			</section>

@@ -1,20 +1,47 @@
+<?php
+  session_start();
+
+  if( !isset( $_SESSION['pseudo'] ) ){
+    header('Location: signIn.php');
+    exit;
+  }
+ ?>
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
     <?php include('includes/head.php') ?>
   </head>
   <body>
       <?php include('includes/header.php') ?>
     <main>
-      <form class="createEnigma" action="#" method="post" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="Titre">
-        <input type="text" name="description" placeholder="Description">
-        <input type="text" name="question" placeholder="question">
-        <input type="text" name="trick" placeholder="Indice">
-        <img src="#" alt="Img_Enigma">
-        <input type="file" name="" value="">
-        <input type="number" name="minutes" placeholder="05">
-        <input type="number" name="seconds" placeholder="00">
+      <h1>Créer une énigme</h1>
+      <?php echo isset( $_GET['msg'] ) ? $_GET['msg'] : ""; ?>
+      <form class="flexColumn" action="enigmaValidator.php" method="post" enctype="multipart/form-data">
+        <div class="createEnigma flex">
+          <div class="">
+            <input type="text" name="title" placeholder="Titre">
+            <input type="text" name="description" placeholder="Description">
+            <input type="text" name="question" placeholder="Question">
+            <input type="text" name="answer" placeholder="Réponse">
+          </div>
+          <div class="">
+            <input type="text" name="trick" placeholder="Indice">
+            <img src="img/enigma/defaultPicture.png" alt="Img_Enigma">
+            <label for="imageEnigma">Choisir une image</label>
+            <input id="imageEnigma" type="file" name="image" accept="image/png, image/jpeg, image/jpg, image/gif"  style="display: none">
+            <div class="time">
+              <input type="number" name="minutes" placeholder="05">
+              <input type="number" name="seconds" placeholder="00">
+            </div>
+
+          </div>
+        </div>
+        <div class="">
+          <input type="submit" name="submit" value="Créer">
+        </div>
+
+
       </form>
     </main>
     <footer>
