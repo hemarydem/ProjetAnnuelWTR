@@ -1,5 +1,4 @@
 <?php
-
 require('includes/config.php');
 session_start();
 
@@ -22,7 +21,7 @@ $working = 1;
 $author = $result['email'];
 $date = date('Y-m-d');
 
-/*if (!empty($title) && !empty($contents) ){
+if (!empty($title) && !empty($contents) ){
     $q = "INSERT INTO TOPIC(title, contents, working, author, postDate) VALUES(:title, :contents, :working, :author, :postDate)";
     $req = $bdd->prepare($q);
     $req->execute([
@@ -36,7 +35,7 @@ $date = date('Y-m-d');
 }else{
     header('location: creationTopic.php?msg=Remplissez les champs');
     exit;
-}*/
+}
 $q = "SELECT * FROM TOPIC";
 $req = $bdd->prepare($q);
 $req->execute([]);
@@ -46,6 +45,6 @@ var_dump($result);
     echo $value;
 }*/
 
-//header('location: creationTopic.php?');
-//exit;
+header('location: creationTopic.php?');
+exit;
 ?>
