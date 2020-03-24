@@ -1,4 +1,5 @@
 <?php
+
 require('includes/config.php');
 session_start();
 
@@ -36,15 +37,8 @@ if (!empty($title) && !empty($contents) ){
     header('location: creationTopic.php?msg=Remplissez les champs');
     exit;
 }
-$q = "SELECT * FROM TOPIC";
-$req = $bdd->prepare($q);
-$req->execute([]);
-$result = $req->fetchAll(PDO::FETCH_ASSOC);
-var_dump($result);
-/*foreach($result as $key => $value) {
-    echo $value;
-}*/
 
-header('location: creationTopic.php?');
+
+header('location:forum.php?');
 exit;
 ?>
