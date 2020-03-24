@@ -15,7 +15,8 @@ session_start();
     ?>
     <main>
         <?php
-            
+
+
             if(isset($_GET['email'])) {
                 $q = 'SELECT email, login, moderator, working, userLevel, creationDate FROM USERS WHERE email=?';
                 $req = $bdd->prepare($q);
@@ -23,7 +24,7 @@ session_start();
                 $results = $req->fetchAll(PDO::FETCH_ASSOC);
 
                 if( count( $results ) == 0 ){
-                    header('Location: admin.php');
+                    header('Location: admin.php?msg=User introuvable');
                     exit;
                 }
 
@@ -44,5 +45,3 @@ session_start();
     <script src="script/profilAdmin.js"></script>
 </body>
 </html>
-
-

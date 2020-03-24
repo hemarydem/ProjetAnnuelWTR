@@ -53,7 +53,7 @@ function changeEmail() {
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {                
-                mail.innerHTML = request.response;
+                document.location.href="UserProfile.php?email=" + newMail;
                 
 			} else {
 				alert("Error: returned status code " + request.status + " " + request.statusText);
@@ -64,7 +64,7 @@ function changeEmail() {
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send(`mail=${mail}&newMail=${newMail}`);
 
-    document.location.href="UserProfile.php?email=" + newMail;
+    
 }
 
 function changeLogin() {

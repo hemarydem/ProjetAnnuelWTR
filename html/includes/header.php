@@ -5,7 +5,7 @@
 			<section class='nav flex'>
 				<li><a href="./">Thomerlas</a></li>
 				<li><a href="users_list.php">users list</a></li>
-				<li><a href="#">Forum</a> </li>
+				<li><a href="forum.php">Forum</a> </li>
 				<li><a href="#">Groupes d'énigmes</a> </li>
 				<li><a href="#">Concours</a> </li>
 				<?php

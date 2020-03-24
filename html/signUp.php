@@ -32,10 +32,10 @@
 					?>
 				</h3>
 				<section>
-					<input type="text" name="pseudo" placeholder=" Pseudo" onpaste="return false;" required><br>
-					<input type="email" name="email" placeholder=" Email" onpaste="return false;" required><br>
-					<input type="password" name="password" placeholder=" Mot de passe" onpaste="return false;" required><br>
-					<input type="password" name="password2" placeholder=" Confirmez le mot de passe" onpaste="return false;" required><br>
+					<input type="text" name="pseudo" placeholder=" Pseudo" required><br>
+					<input type="email" name="email" placeholder=" Email" required><br>
+					<input type="password" name="password" placeholder=" Mot de passe" required><br>
+					<input type="password" name="password2" placeholder=" Confirmez le mot de passe"  required><br>
 				</section>
 
 				<section id="captchaZone">
