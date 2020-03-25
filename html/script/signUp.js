@@ -60,7 +60,6 @@ inputs['password'].addEventListener('change', function(){
 
     //Chiffre
     if(this.value.charCodeAt(i) >= 48 && this.value.charCodeAt(i) <= 57){
-
       checkDigit = true;
     }
   }
@@ -106,5 +105,11 @@ inputs['password2'].addEventListener('input', function(){
   }
 });
 
-//interdire le click droit
-document.oncontextmenu = new Function("return false");
+/*function check(){
+  let msg = document.getElementById('msg').innerHTML;
+
+  console.log(msg.length);
+  
+  return ( msg.length > 0 ? false : true);
+}*/
+

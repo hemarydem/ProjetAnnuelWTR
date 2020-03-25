@@ -22,31 +22,31 @@
 
 	//pseudo
 	if(!isset($_POST['pseudo'])){
-		header('Location:signUp.php?msg=Pseudo vide');
+		header('Location:signUp.php?msg=Pseudo vide&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 	elseif(strlen($_POST['pseudo']) < 5){
-		header('Location:signUp.php?msg=Pseudo trop court');
+		header('Location:signUp.php?msg=Pseudo trop court&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 
 	elseif(strlen($_POST['pseudo']) > 16){
-		header('Location:signUp.php?msg=Pseudo trop long');
+		header('Location:signUp.php?msg=Pseudo trop long&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 
 
 	//Mot de passe
 	if(!isset($_POST['password'])){
-		header('Location:signUp.php?msg=Mot de passe vide');
+		header('Location:signUp.php?msg=Mot de passe vide&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 	elseif(strlen($_POST['password']) < 5){
-		header('Location:signUp.php?msg=Mot de passe trop court');
+		header('Location:signUp.php?msg=Mot de passe trop court&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 	elseif(strlen($_POST['password']) > 20){
-		header('Location:signUp.php?msg=Mot de passe trop long');
+		header('Location:signUp.php?msg=Mot de passe trop long&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 /*______________________________________________*/
@@ -66,25 +66,25 @@
 $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 
 	if( !preg_match("#[A-Z]#", $_POST['password']) ){
-		header('Location:signUp.php?msg=Le mot de passe doit contenir au moins une majuscule');
+		header('Location:signUp.php?msg=Le mot de passe doit contenir au moins une majuscule&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 	elseif ( !preg_match("#[0-9]#", $_POST['password']) ) {
-		header('Location:signUp.php?msg=Le mot de passe doit contenir au moins un chiffre');
+		header('Location:signUp.php?msg=Le mot de passe doit contenir au moins un chiffre&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 	elseif ( !preg_match("#[$specialCars]#", $_POST['password']) ) {
-		header('Location:signUp.php?msg=Le mot de passe doit contenir au moins un caractère spécial');
+		header('Location:signUp.php?msg=Le mot de passe doit contenir au moins un caractère spécial&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 
 
 	if(!isset($_POST['password2'])){
-		header('Location:signUp.php?msg=Veuillez confirmer votre mot de passe');
+		header('Location:signUp.php?msg=Veuillez confirmer votre mot de passe&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 	elseif ($_POST['password2'] != $_POST['password']) {
-		header('Location:signUp.php?msg=Les deux mots de passes sont différents');
+		header('Location:signUp.php?msg=Les deux mots de passes sont différents&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 /*______________________________________________*/
@@ -97,11 +97,11 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 /*___verification de l'email_____________________________________________*/
 	// Format email
 	if(!isset($_POST['email']) ){
-		header('Location:signUp.php?msg=Email vide');
+		header('Location:signUp.php?msg=Email vide&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 	else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-		header('Location:signUp.php?msg=Email non valide');
+		header('Location:signUp.php?msg=Email non valide&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 /*______________________________________________*/
@@ -120,7 +120,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 	$req->execute([$_POST['email']]);
 	$results = $req->fetchAll(PDO::FETCH_ASSOC);
 	if(count($results) > 0){
-		header('Location:signUp.php?msg=Email déjà prit');
+		header('Location:signUp.php?msg=Email déjà prit&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 
@@ -130,7 +130,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 	$req->execute([$_POST['pseudo']]);
 	$results = $req->fetchAll(PDO::FETCH_ASSOC);
 	if(count($results) > 0){
-		header('Location:signUp.php?msg=Pseudo déjà prit');
+		header('Location:signUp.php?msg=Pseudo déjà prit&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 /*______________________________________________*/
@@ -142,7 +142,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 //
 /*___CAPTCHA_____________________________________________________________*/
 	if($_SESSION['captcha'] == false){
-		header('Location:signUp.php?msg=Vous êtes un robot');
+		header('Location:signUp.php?msg=Vous êtes un robot&pseudo='.$_POST['pseudo'].'&email='.$_POST['email']);
 		exit;
 	}
 /*_______________________________________________*/

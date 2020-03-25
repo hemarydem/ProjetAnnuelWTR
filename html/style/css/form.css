@@ -1,16 +1,11 @@
 /*______FORM__________________________________________*/
 
 form{
-	width: 450px;
-	display: block;
-	padding-top: 60px;
-	padding-bottom: 120px;
+	width: 80%;
 	margin: auto;
 	margin-top: 100px;
 	margin-bottom: 50px;
 	justify-content: center;
-	text-align: center;
-	vertical-align: middle;
 	background-color: rgba(0,0,0,0.3);
 	color: #ecf0f1;
 	border-radius: 3px;
@@ -22,14 +17,14 @@ form{
 }
 
 form input{
-	width: 60%;
-	font-size: 16px;
+	width:  90%;
+	font-size: 20px;
 	font-family: Helvetica;
-	margin: 3px;
+	padding: 16px;
+	margin: 5px;
 	border: none;
 	background-color: rgba(0,0,0,0.7);
 	border-radius: 3px;
-	padding: 5px;
 	color : #ecf0f1;
 
 }
@@ -44,7 +39,6 @@ form .formBottom{
 	font-size: 16px;
 	color: #ecf0f1;
 	border-radius: 20px;
-	height: 30px;
 }
 
 .formButton:hover{
@@ -55,4 +49,33 @@ form .formBottom{
 
 form a:hover{
 	color: #cba70f;
+}
+
+form > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#inputsSignUp{
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;;
+}
+
+/*Inscription*/
+#formSignUp{
+	display: flex;
+}
+
+#formSignUp > div{
+	width: 49%;
+}
+
+/*______FORM Rules__________________________________________*/
+
+.rules{
+	font-size: 0.6em;
+	color: grey;
 }

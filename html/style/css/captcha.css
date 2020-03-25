@@ -1,21 +1,22 @@
 /*______CAPTCHA__________________________________________*/
 
 #captchaContainer{
-	width: 340px;
 	margin: auto;
-  color: black;
+	width: 340px;;
+  	color: black;
 }
 
 #chessboardBG{
-	height: 340px;
 	width: 340px;
-	padding: 42px;
+	height: 340px;
+	display: flex;
+	align-items: center;
 	justify-content: center;
+	margin: 0 auto;
 	background-color: #777471;
 	background-image: url('../../img/captcha/chessboardBG.svg');
 	border-radius: 3px;
 	box-shadow: 0px 0px 10px rgba(0,0,0,0.4);
-	margin-top: 20px;
 }
 
 #chessboard, #pawn {
@@ -23,12 +24,13 @@
 }
 
 #captchaZone{
-  background-color: #eeeeee;
-  padding-top: 20px;
-  padding-bottom: 20px;
-	width: 380px;
+	background-color: #eeeeee;
+	width: 80%;
+	height: 100%;
+	padding: 50px;
+	height: 80%;
 	margin: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	border-radius: 3px;
 }
