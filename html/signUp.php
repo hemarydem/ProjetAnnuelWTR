@@ -36,12 +36,12 @@
 						?>
 					</h3>
 					<section id="inputsSignUp">
-						<input type="text" name="pseudo" placeholder=" Pseudo" autocomplete="on" required <?php echo isset( $_GET['pseudo'] ) ? "value=" . htmlspecialchars($_GET['pseudo']) : "" ?> ><br>
+						<input type="text" name="pseudo" placeholder=" Pseudo" autocomplete="on" required <?php echo isset( $_GET['pseudo'] ) ? "value=" . htmlspecialchars($_GET['pseudo']) : "" ?> >
 						<small class="rules" id="indicationPseudo">* Le pseudo doit faire entre 5 et 16 caractères</small>
-						<input type="email" name="email" placeholder=" Email" autocomplete="on" required <?php echo isset( $_GET['email'] ) ? "value=" . htmlspecialchars($_GET['email']) : "" ?>><br>
-						<input type="password" name="password" placeholder=" Mot de passe" autocomplete="on" required><br>
+						<input type="email" name="email" placeholder=" Email" autocomplete="on" required <?php echo isset( $_GET['email'] ) ? "value=" . htmlspecialchars($_GET['email']) : "" ?>>
+						<input type="password" name="password" placeholder=" Mot de passe" autocomplete="on" required>
 						<small class="rules" id = "indicationPwd">* Le mot de passe doit contenir au moins 1 majuscule, 1 chiffre et 1 caractère spécial</small>
-						<input type="password" name="password2" placeholder=" Confirmez le mot de passe" autocomplete="on" required><br>
+						<input type="password" name="password2" placeholder=" Confirmez le mot de passe" autocomplete="on" required>
 					</section>
 				</div>
 				
