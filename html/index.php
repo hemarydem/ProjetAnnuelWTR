@@ -21,7 +21,7 @@
 			<?php
 
 
-			$q = 'SELECT title,description FROM ENIGMA';
+			$q = 'SELECT title,description FROM ENIGMA ORDER BY idEnigma DESC';
 			$req = $bdd->query($q);
 			$results = $req->fetchAll(PDO::FETCH_ASSOC);
 

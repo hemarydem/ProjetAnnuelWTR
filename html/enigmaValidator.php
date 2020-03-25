@@ -1,11 +1,14 @@
 <?php
 session_start();
+require('includes/config.php');
+
 
 //le joueur est connecté
 if( !isset( $_SESSION['pseudo'] ) ){
   header('Location: signIn.php');
   exit;
 }
+$pseudo = $_SESSION['pseudo'];
 
 //trim des inputs
 foreach ($_POST as $key => $value) {
@@ -30,6 +33,22 @@ if( !isset( $_POST['answer'] )  || strlen($_POST['answer']) < 5 || strlen($_POST
   header('Location: createEnigma.php?msg=Réponse invalide');
   exit;
 }
+if( !isset( $_POST['level'] ) ){
+  header('Location: createEnigma.php?msg=Réponse invalide');
+  exit;
+}else{
+  //check the level really exists in the bdd
+  $q = 'SELECT name FROM LEVEL WHERE name = ?';
+  $req = $bdd->prepare($q);
+  $req->execute([$_POST['level']]);
+  $result = $req->fetch(PDO::FETCH_ASSOC);
+  if( count( $result ) == 0 ){
+    header('Location: createEnigma.php?msg=Réponse invalide');
+    exit;
+  }else{
+    $level = $result['name'];
+  }
+}
 if( !isset( $_POST['trick'] )  || strlen($_POST['trick']) < 5 || strlen($_POST['trick']) > 100 ){
   header('Location: createEnigma.php?msg=Astuce invalide');
   exit;
@@ -49,33 +68,53 @@ $acceptable = [
 
 $maxsize = 1024 * 1024; // 1Mo
 
-if( isset($_FILES['image']['type']) && !in_array( $_FILES['image']['type'], $acceptable ) ){
-  header('Location: createEnigma.php?msg=Fichier invalide');
-	exit;
+if( $_FILES['image']['type'] != NULL && !in_array( $_FILES['image']['type'], $acceptable ) ){
+  header('Location: connexion.php?msgInscription=Fichier invalide');
+  exit;
 }
 
-//image < 1Mo
-elseif(isset($_FILES['image']['type']) && $_FILES['image']['size'] > $maxsize){
-  header('Location: createEnigma.php?msg=Fichier trop volumineux');
-	exit;
+elseif($_FILES['image']['size'] > $maxsize){
+header('Location: connexion.php?msgInscription=Fichier trop volumineux');
+exit;
 }
 
 //récupérer l'id de l'adhérent
-echo $_SESSION['pseudo'];
+$q = 'SELECT email FROM USERS WHERE login = ?';
+  $req = $bdd->prepare($q);
+  $req->execute([ $pseudo ]);
+  $result = $req->fetch(PDO::FETCH_ASSOC);
+  $author = $result['email'];
+
 
 //préparer les variables
-$title = $_POST['title'];
-$description = $_POST['description'];
-$question = $_POST['question'];
-$answer = $_POST['answer'];
-$trick = $_POST['trick'];
+$title = htmlspecialchars($_POST['title']);
+$description = htmlspecialchars($_POST['description']);
+$question = htmlspecialchars($_POST['question']);
+$answer = htmlspecialchars($_POST['answer']);
+$trick = htmlspecialchars($_POST['trick']);
 $gain = 100;
-$working = 1;
-$author = $id;
-$creationDate = date(Y-m-d);
-$enigmaLevel = 'beginner';
+$creationDate = date('Y-m-d');
 
 //ajouter l'énigme dans la bdd sans l'image
+$q = 'INSERT INTO ENIGMA(title,description,question,answer,trick,gain,author,creationDate,enigmaLevel) VALUES(:title,:description,:question,:answer,:trick,:gain,:author,:creationDate,:enigmaLevel)';
+$req = $bdd->prepare($q);
+$req->execute([
+                'title'       =>  $title,
+                'description' =>  $description,
+                'question'    =>  $question,
+                'answer'      =>  $answer,
+                'trick'       =>  $trick,
+                'gain'        =>  $gain,
+                'author'      =>  $author,
+                'creationDate'=>  $creationDate,
+                'enigmaLevel' =>  $level
+              ]);
+
+$q = 'SELECT * FROM ENIGMA WHERE title = ?';
+$req = $bdd->prepare($q);
+$req->execute([$title]);
+$result= $req->fetchAll(PDO::FETCH_ASSOC);
+
 //télécharger l'image
   //chemin d'enregistrement
   //récuperer l'id de l'énigme ajoutée

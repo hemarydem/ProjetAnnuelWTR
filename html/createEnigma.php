@@ -1,5 +1,6 @@
 <?php
   session_start();
+  require('includes/config.php');
 
   if( !isset( $_SESSION['pseudo'] ) ){
     header('Location: signIn.php');
@@ -24,6 +25,18 @@
             <input type="text" name="description" placeholder="Description">
             <input type="text" name="question" placeholder="Question">
             <input type="text" name="answer" placeholder="Réponse">
+            <select name="level">
+              <?php
+                //select the levels
+                $q = 'SELECT name FROM LEVEL';
+                $req = $bdd->query($q);
+                $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $key => $value){
+                  echo ' <option>' . $value['name'] . '</option>';
+                }
+
+              ?>
+            </select>
           </div>
           <div class="">
             <input type="text" name="trick" placeholder="Indice">
