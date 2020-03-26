@@ -27,7 +27,7 @@ if(isset($_POST['login']) && !empty($_POST['login'])) {
         $from = 'Thomerlas';
         $name = 'Thomerlas';
         $subject = 'initialisation mot de passe';
-        $link = 'https://thomerlas.online/restPwd.php?login=' . $login . '&token=' . $token;
+        $link = 'https://thomerlas.online/resetPwd.php?login=' . $login . '&token=' . $token;
         $message = '<a href="' . $link . '"> Clickez sur ce lien pour initialiser un nouveau mot de passe </a>';
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
