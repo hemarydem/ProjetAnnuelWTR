@@ -98,10 +98,3 @@ form > div {
 	align-self: flex-start;
 	margin: 20px 0 0 30px;
 }
-
-/*______FORM Rules__________________________________________*/
-
-.rules{
-	font-size: 0.6em;
-	color: grey;
-}

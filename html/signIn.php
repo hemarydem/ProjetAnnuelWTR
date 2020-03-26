@@ -29,18 +29,18 @@
 					}
 				?>
 				<section>
-					<input type="text" name="pseudo" placeholder=" Pseudo"><br>
-					<input type="password" name="password" placeholder=" Mot de passe"><br>
+					<input id="inputSignIn" type="text" name="pseudo" placeholder=" Pseudo"><br>
+					<input type="password" autocomplete="on" name="password" placeholder=" Mot de passe"><br>
 				</section>
 				<section class="formBottom">
 					<input class="formButton" type="submit" name="submit" value="Connexion"><br>
 					<a href="signUp.php">Pas de compte ? S'inscrire</a><br>
-					<a href="forgotPwd.php">Mot de passe oublié</a>
+					<a onclick="redirect()" >Mot de passe oublié</a>
 				</section>
 			</form>
 
 		</main>
 
-
+		<script src="script/forgotPwd.js"></script>
 	</body>
 </html>
