@@ -2,6 +2,7 @@
 
 form{
 	width: 80%;
+	max-width: 1100px;
 	margin: auto;
 	margin-top: 100px;
 	margin-bottom: 50px;
@@ -31,6 +32,9 @@ form input{
 
 form .formBottom{
 	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .formButton{
@@ -57,6 +61,26 @@ form > div {
 	align-items: center;
 }
 
+
+
+/*Inscription*/
+#formSignUp{
+	display: flex;
+	flex-direction: column;
+}
+
+#formSignUp > div{
+	display: flex;
+	flex-direction: row;
+}
+
+#formSignUp > div > div{
+	width: 49%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 #inputsSignUp{
 	width: 100%;
 
@@ -70,13 +94,9 @@ form > div {
 	margin: 0 0 10px 30px;
 }
 
-/*Inscription*/
-#formSignUp{
-	display: flex;
-}
-
-#formSignUp > div{
-	width: 49%;
+#inputsSignUp label{
+	align-self: flex-start;
+	margin: 20px 0 0 30px;
 }
 
 /*______FORM Rules__________________________________________*/

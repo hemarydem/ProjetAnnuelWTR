@@ -3,7 +3,11 @@
 #captchaContainer{
 	margin: auto;
 	width: 340px;;
-  	color: black;
+	  color: black;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
 }
 
 #chessboardBG{
@@ -25,6 +29,7 @@
 
 #captchaZone{
 	background-color: #eeeeee;
+	flex-grow: 0;
 	width: 80%;
 	height: 100%;
 	padding: 50px;
