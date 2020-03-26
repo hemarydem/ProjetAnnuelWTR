@@ -1,5 +1,4 @@
 <?php
-    require('includes/config.php');
     session_start();
 ?>
 
@@ -14,7 +13,7 @@
             <h1>mot de passe oublié</h1>
             <p>Si vous avez oublié votre mot de passe rentrer votre adresse ci-dessous et cliquer sur envoyer</p>
             <form method="POST" action="forgotPwdProcess.php">
-                <input type="mail" name="mail" placeholder="votre mail">
+                <input type="text" name="login" placeholder="Votre pseudo">
                 <input type="submit" value="envoyer">
             </form>
 		</main>

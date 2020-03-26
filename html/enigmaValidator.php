@@ -2,7 +2,6 @@
 session_start();
 require('includes/config.php');
 
-
 //le joueur est connecté
 if( !isset( $_SESSION['pseudo'] ) ){
   header('Location: signIn.php');

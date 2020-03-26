@@ -1,9 +1,6 @@
 
-
-let inputSignIn = document.getElementById("inputSignIn")
-
 function redirect(){
-    alert('OK');
+    document.location.href = "forgotPwd.php?pseudo=" + document.getElementById("inputSignIn").value;
 }
 
 
