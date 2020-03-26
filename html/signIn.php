@@ -35,7 +35,7 @@
 				<section class="formBottom">
 					<input class="formButton" type="submit" name="submit" value="Connexion"><br>
 					<a href="signUp.php">Pas de compte ? S'inscrire</a><br>
-					<a href="#">Mot de passe oublié</a>
+					<a href="forgotPwd.php">Mot de passe oublié</a>
 				</section>
 			</form>
 
