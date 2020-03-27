@@ -23,12 +23,14 @@
 		<main>
 
 			<form id="formSignUp" name="signUp" method="POST" action="signUpProcess.php" >
+				
+			<h1>Inscription</h1>
+
 				<div>
+
+
 					<div>
-					
-						<h1>Inscription</h1>
-						
-						
+
 						<h3 id="msg">
 							<?php
 								if(isset($_GET['msg'])){
@@ -37,6 +39,9 @@
 							?>
 						</h3>
 						<section id="inputsSignUp">
+							<img id="fieldImg" src="img/profile/default-user-image.png" alt="previewImg">
+							<label for="inputImg">Choisir une image</label>
+							<input id="inputImg" type="file" accept="image/png, image/jpeg, image/gif" >
 							<label for="">Pseudo</label>
 							<input type="text" name="pseudo" placeholder="Entre 5 et 16 caractères" autocomplete="on" required <?php echo isset( $_GET['pseudo'] ) ? "value=" . htmlspecialchars($_GET['pseudo']) : "" ?> >
 							<label for="">Email</label>
