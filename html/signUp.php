@@ -22,7 +22,7 @@
 
 		<main>
 
-			<form id="formSignUp" name="signUp" method="POST" action="signUpProcess.php" >
+			<form id="formSignUp" name="signUp" method="POST" action="signUpProcess.php" enctype="multipart/form-data">
 				
 			<h1>Inscription</h1>
 
@@ -40,8 +40,8 @@
 						</h3>
 						<section id="inputsSignUp">
 							<img id="fieldImg" src="img/profile/default-user-image.png" alt="previewImg">
-							<label for="inputImg">Choisir une image</label>
-							<input id="inputImg" type="file" accept="image/png, image/jpeg, image/gif" >
+							<label class="labelImg" for="inputImg">Choisir une image</label>
+							<input id="inputImg" type="file" name='image' accept="image/png, image/jpeg, image/jpg, image/gif" style="display:none">
 							<label for="">Pseudo</label>
 							<input type="text" name="pseudo" placeholder="Entre 5 et 16 caractères" autocomplete="on" required <?php echo isset( $_GET['pseudo'] ) ? "value=" . htmlspecialchars($_GET['pseudo']) : "" ?> >
 							<label for="">Email</label>
@@ -74,7 +74,7 @@
 		</main>
 		<footer>
 		</footer>
-		
+		<script type="text/javascript" src="script/previewImage.js"></script>
 		<script type="text/javascript" src="script/captcha.js"></script>
 		<script type="text/javascript" src="script/signUp.js"></script>
 	</body>

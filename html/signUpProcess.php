@@ -165,6 +165,29 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 //
 //
 //
+/*_________________traitemant image_____________________________________*/
+	if( $_FILES['image']['type'] != NULL ){
+	
+		//verifiaction du poids du fichier
+		$maxsize = 1024 * 1024; // 1Mo
+		$acceptable = [
+		  'image/jpeg',
+		  'image/jpg',
+		  'image/png',
+		  'image/gif'
+		];
+		
+		if(!in_array( $_FILES['image']['type'], $acceptable ) ){
+			header('Location:signUp.php?msg=Fichier invalide');
+			exit;
+		}
+		elseif($_FILES['image']['size'] > $maxsize){
+		  header('Location:signUp.php?msg=Fichier trop volumineux');
+			exit;
+		}
+	}
+	
+/*____________________________________________________________________ */
 //
 //
 //
@@ -185,6 +208,35 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 //
 //
 //
+/*___Requête SQL_________________________________________________________*/
+
+if( $_FILES['image']['type'] != NULL ){
+	//telecharger l'image
+	//chemin d'enregistrement
+	$path = 'img/profile/';
+	if(!file_exists($path)){
+	mkdir($path, 0777, true);
+}
+
+	//renomer l'image avec l'id de l'utilisateur et la date
+	$imagename = $_FILES['image']['name'];
+	$temp = explode('.', $imagename);
+	$extension = end($temp);
+	$timestamp = time();
+	$imagename = 'image_profile-' . $login . '-' . $timestamp . '.' . $extension;
+
+	//déplacer l'image dans le dossier img/profile/
+	$pathImage = $path . $imagename;
+	move_uploaded_file( $_FILES['image']['tmp_name'], $pathImage );
+
+	//inserer le chemin de l'image dans la bdd
+	if($_FILES['image']['name'] != NULL){
+		$q = 'UPDATE USERS SET profilePicture = ? WHERE email = ?';
+		$req = $bdd->prepare($q);
+		$req->execute([$imagename, $email ]);
+	}
+}
+/*_______________________________________________*/
 //
 //
 //

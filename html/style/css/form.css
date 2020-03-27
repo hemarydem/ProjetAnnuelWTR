@@ -17,6 +17,30 @@ form{
 	color: #ff7979;
 }
 
+
+/* IMAGE */
+.labelImg{
+	padding: 12px;
+	background-color: #3c6382;
+	border-radius: 100px;
+	align-self: center !important;
+	margin: 20px 0 !important;
+}
+
+.labelImg:hover{
+	color: #cba70f;
+	background-color: white;
+}
+
+#fieldImg{
+	width: 120px;
+	height: 120px;
+	border-radius: 3px;
+}
+
+
+/**/
+
 form input{
 	width:  90%;
 	font-size: 20px;
@@ -38,6 +62,7 @@ form .formBottom{
 }
 
 .formButton{
+
 	border: none;
 	background-color: #3c6382;
 	font-size: 16px;
@@ -87,10 +112,9 @@ form > div {
 
 #inputsSignUp{
 	width: 100%;
-
 	display: flex;
 	flex-direction: column;
-	align-items: center;;
+	align-items: center;
 }
 
 #inputsSignUp small{
