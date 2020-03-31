@@ -153,7 +153,9 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 	$q = 'SELECT idLevel FROM LEVEL WHERE name = ?';
 	$request = $bdd->prepare($q);
 	$request->execute(['beginner']);
-	$userLevel =  $req->fetchAll(PDO::FETCH_ASSOC);
+	$result =  $req->fetch(PDO::FETCH_ASSOC);
+	$userLevel = $result['idLevel'];
+
 /*_______________________________________________*/
 //
 //
