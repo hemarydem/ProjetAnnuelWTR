@@ -13,7 +13,7 @@
       <section id="body_forum">
 	  <a href="creationTopic.php">Creer un Topic</a>
         <?php
-				$q = 'SELECT idTopic, title, contents FROM TOPIC ORDER BY idTopic DESC';
+				$q = 'SELECT idTopic, title, content FROM TOPIC ORDER BY idTopic DESC';
 				$req = $bdd->prepare($q);
 				$req->execute();
 				//$result = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -23,7 +23,7 @@
 				<a href="pageTopic.php?topic=<?php echo $result['idTopic'] ?>">
 					<div class="topic">
 						<h4><?php echo $result['title'];?></h4>
-						 <?php echo $result['contents'] ?>
+						 <?php echo $result['content'] ?>
 					</div>
 				</a>
 		<?php } 

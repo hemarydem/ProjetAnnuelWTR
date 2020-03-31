@@ -10,25 +10,25 @@ if( !isset( $_POST['title'] ) ||  !isset( $_POST['content'] ) ){
 
 //get the id of the user
 $pseudo = $_SESSION['pseudo'];
-$q = 'SELECT email FROM USERS WHERE login = ?';
+$q = 'SELECT email FROM USER WHERE login = ?';
 $req = $bdd->prepare($q);
 $req->execute([$pseudo]);
 $result = $req->fetch(PDO::FETCH_ASSOC);
 
 
 $title = htmlspecialchars( $_POST['title'] );
-$contents = htmlspecialchars( $_POST['content'] );
-$working = 1;
+$content = htmlspecialchars( $_POST['content'] );
+$active = 1;
 $author = $result['email'];
 $date = date('Y-m-d');
 
-if (!empty($title) && !empty($contents) ){
-    $q = "INSERT INTO TOPIC(title, contents, working, author, postDate) VALUES(:title, :contents, :working, :author, :postDate)";
+if (!empty($title) && !empty($content) ){
+    $q = "INSERT INTO TOPIC(title, content, active, author, postDate) VALUES(:title, :content, :active, :author, :postDate)";
     $req = $bdd->prepare($q);
     $req->execute([
         			'title'     =>  $title,
-					'contents'  =>  $contents,
-					'working'   =>  $working,
+					'content'  =>  $content,
+					'active'   =>  $active,
 					'author'    =>  $author,
 					'postDate'  =>  $date
 				]);

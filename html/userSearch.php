@@ -2,7 +2,7 @@
 require('includes/config.php');
 
 if(isset($_POST['emailKeyWord'])) {
-    $q = "SELECT email, creationDate, working,login FROM USERS WHERE email LIKE ? OR login LIKE ?";											
+    $q = "SELECT email, creationDate, active,login FROM USER WHERE email LIKE ? OR login LIKE ?";											
     $req = $bdd->prepare($q);
     $unknowEmail = $_POST['emailKeyWord'].'%';
     $req->execute([$unknowEmail, $unknowEmail]);

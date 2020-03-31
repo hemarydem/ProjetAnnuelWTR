@@ -61,10 +61,10 @@ function searchUser() {
                     arrayTd[indexTd].innerHTML = element['email'];
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
                     indexTd++;
-                    //creat a column working
+                    //creat a column active
                     arrayTd[indexTd] = document.createElement('td');
-                    arrayTd[indexTd].innerHTML = element['working'];
-                    arrayTd[indexTd].id = 'working' + indice.toString;
+                    arrayTd[indexTd].innerHTML = element['active'];
+                    arrayTd[indexTd].id = 'active' + indice.toString;
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
                     indexTd++;
                     //creat a column

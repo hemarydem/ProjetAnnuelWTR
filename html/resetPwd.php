@@ -12,7 +12,7 @@
   $loginGET = $_GET['login'];
   $tokenGET = $_GET['token'];
 
-  $q = 'SELECT token FROM USERS WHERE login = ?';
+  $q = 'SELECT token FROM USER WHERE login = ?';
   $req = $bdd->prepare($q);
   $req->execute([$loginGET]);
   $tokenBDD = $req->fetch();

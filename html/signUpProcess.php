@@ -115,7 +115,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 /*___Si l'email ou le pseudo ne sont pas déjà utilisés____________________*/
 
 	//Verifier que l'email n'est pas déjà prit
-	$q = 'SELECT email FROM USERS WHERE email = ?';
+	$q = 'SELECT email FROM USER WHERE email = ?';
 	$req = $bdd->prepare($q);
 	$req->execute([$_POST['email']]);
 	$results = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -125,7 +125,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 	}
 
 	//Verifier que le pseudo n'est pas déjà prit
-	$q = 'SELECT email FROM USERS WHERE login = ?';
+	$q = 'SELECT email FROM USER WHERE login = ?';
 	$req = $bdd->prepare($q);
 	$req->execute([$_POST['pseudo']]);
 	$results = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -157,7 +157,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 	$email = $_POST['email'];
 	$pass =  hash('sha256', $_POST['password'] );  // Hashage avant insertion en bdd
 	$moderator = 0;
-	$working = 0;
+	$active = 0;
 	$userLevel = 'beginner';
 	$date = date('Y-m-d');
 	$token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
@@ -192,14 +192,14 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 //
 //
 /*___Requête SQL_________________________________________________________*/
-	$q = 'INSERT INTO USERS (email,login,pass,moderator,working,userLevel,creationDate,token) VALUES (:email,:login,:pass,:moderator,:working,:userLevel,:creationDate,:token)';
+	$q = 'INSERT INTO USER (email,login,pass,moderator,active,userLevel,creationDate,token) VALUES (:email,:login,:pass,:moderator,:active,:userLevel,:creationDate,:token)';
 	$req = $bdd->prepare($q);
 	$req->execute([
 		'email' => $email,
 		'login' => $login,
 		'pass' => $pass,
 		'moderator' => $moderator,
-		'working' => $working,
+		'active' => $active,
 		'userLevel' => $userLevel,
 		'creationDate' => $date,
 		'token' => $token
@@ -231,7 +231,7 @@ if( $_FILES['image']['type'] != NULL ){
 
 	//inserer le chemin de l'image dans la bdd
 	if($_FILES['image']['name'] != NULL){
-		$q = 'UPDATE USERS SET profilePicture = ? WHERE email = ?';
+		$q = 'UPDATE USER SET profilePicture = ? WHERE email = ?';
 		$req = $bdd->prepare($q);
 		$req->execute([$imagename, $email ]);
 	}

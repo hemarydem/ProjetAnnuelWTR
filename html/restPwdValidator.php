@@ -5,7 +5,7 @@
      $newPassword = hash('sha256', $newPassword ); 
 
      echo $_GET['login'];
-     $q = 'UPDATE USERS SET pass = ? WHERE login = ? ';
+     $q = 'UPDATE USER SET pass = ? WHERE login = ? ';
      $req = $bdd->prepare($q);
      $req->execute([$newPassword,$_GET['login']]);
      header('location:signIn.php?msg=Votre compte est maintenant actif');

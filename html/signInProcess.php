@@ -5,7 +5,7 @@
 	$login = htmlspecialchars($_POST['pseudo']);
 	$pass = hash('sha256', $_POST['password']); // hash pour le trouver dans bdd
 
-	$q = 'SELECT email,working FROM USERS WHERE login = ? AND pass = ?';
+	$q = 'SELECT email,active FROM USER WHERE login = ? AND pass = ?';
 	$req = $bdd->prepare($q);
 	$req->execute([$login, $pass]);
 	$results = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -18,7 +18,7 @@
 	}
 	else{ // Utilisateur existe avec bons identifiants
 
-		if( $results[0]['working'] == 1){	//activé
+		if( $results[0]['active'] == 1){	//activé
 			session_start();
 			$_SESSION['pseudo'] = $login;
 			header('location:./');

@@ -7,7 +7,7 @@ if(isset($_POST['login']) && !empty($_POST['login'])) {
     
 //________check if the login own an account__________//
 
-    $q = 'SELECT email, login FROM users WHERE login = ?';
+    $q = 'SELECT email, login FROM USER WHERE login = ?';
     $request = $bdd->prepare($q);
     $request->execute([$login]);
     $result = $request->fetch(PDO::FETCH_ASSOC);
@@ -17,7 +17,7 @@ if(isset($_POST['login']) && !empty($_POST['login'])) {
 
 //__________Reset the token__________//
         $token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
-        $q ='UPDATE USERS SET token= :token WHERE email= :mail';
+        $q ='UPDATE USER SET token= :token WHERE email= :mail';
 	    $req = $bdd->prepare($q);
         $req->execute(['token' => $token, 'mail' => $mail]);
       

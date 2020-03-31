@@ -24,8 +24,8 @@ function changeModerator() {
     request.send(`mail=${mail}&moderator=${moderator.innerHTML}`);
 }
 
-function changeWorking() {
-    let working = document.getElementById('working');
+function changeactive() {
+    let active = document.getElementById('active');
 
     
 	let request = new XMLHttpRequest();  
@@ -33,7 +33,7 @@ function changeWorking() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
                 
-                working.innerHTML = request.response;
+                active.innerHTML = request.response;
                 
 			} else {
 				alert("Error: returned status code " + request.status + " " + request.statusText);
@@ -42,7 +42,7 @@ function changeWorking() {
 	}
 	request.open("POST", "profilAjaxProcess.php", true); 
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    request.send(`mail=${mail}&working=${working.innerHTML}`);
+    request.send(`mail=${mail}&active=${active.innerHTML}`);
 }
 
 

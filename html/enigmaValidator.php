@@ -78,7 +78,7 @@ exit;
 }
 
 //récupérer l'id de l'adhérent
-$q = 'SELECT email FROM USERS WHERE login = ?';
+$q = 'SELECT email FROM USER WHERE login = ?';
   $req = $bdd->prepare($q);
   $req->execute([ $pseudo ]);
   $result = $req->fetch(PDO::FETCH_ASSOC);

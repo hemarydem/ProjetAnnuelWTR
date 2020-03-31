@@ -1,7 +1,7 @@
 <?php
 	require('includes/config.php');
 	session_start();
-	$q = 'SELECT email,login,creationDate,working,token FROM USERS';
+	$q = 'SELECT email,login,creationDate,active,token FROM USER';
 	$req = $bdd-> query($q);
 	$result = $req-> fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -38,7 +38,7 @@
 					<td><?php echo $value['email']; ?></td>
 					<td><?php echo $value['login']; ?></td>
 					<td><?php echo $value['creationDate']; ?></td>
-					<td><?php echo $value['working']; ?></td>
+					<td><?php echo $value['active']; ?></td>
 					<td><?php echo $value['token']; ?></td>
 				</tr>
 
