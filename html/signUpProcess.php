@@ -149,6 +149,12 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 //
 //
 //
+/*_______________________________________________*/
+	$q = 'SELECT idLevel FROM LEVEL WHERE name = ?';
+	$request = $bdd->prepare($q);
+	$request->execute(['beginner']);
+	$userLevel =  $req->fetchAll(PDO::FETCH_ASSOC);
+/*_______________________________________________*/
 //
 //
 //
@@ -158,9 +164,9 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 	$pass =  hash('sha256', $_POST['password'] );  // Hashage avant insertion en bdd
 	$moderator = 0;
 	$active = 0;
-	$userLevel = 'beginner';
 	$date = date('Y-m-d');
 	$token = base_convert(hash('sha256', time() . mt_rand()), 16, 36);
+	$points = 0;
 /*_______________________________________________*/
 //
 //
@@ -192,7 +198,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 //
 //
 /*___Requête SQL_________________________________________________________*/
-	$q = 'INSERT INTO USER (email,login,pass,moderator,active,userLevel,creationDate,token) VALUES (:email,:login,:pass,:moderator,:active,:userLevel,:creationDate,:token)';
+	$q = 'INSERT INTO USER (email,login,pass,moderator,active,userLevel,creationDate,token,points) VALUES (:email,:login,:pass,:moderator,:active,:userLevel,:creationDate,:token,:points)';
 	$req = $bdd->prepare($q);
 	$req->execute([
 		'email' => $email,
@@ -202,7 +208,8 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 		'active' => $active,
 		'userLevel' => $userLevel,
 		'creationDate' => $date,
-		'token' => $token
+		'token' => $token,
+		'points' => $points
 	]);
 /*_______________________________________________*/
 //
