@@ -7,53 +7,58 @@
     }
 
     $mail = $_POST['mail'];
+    $req = $bdd->prepare('SELECT idUser FROM USER WHERE email = ?');
+    $req->execute([$_POST['mail']]);
+    $resulr = $req->fetch(PDO::FETCH_ASSOC);
+    $idUser = $result['idUser'];
+
 
     if( isset($_POST['moderator']) ){
-        
+
         //___________check the value of user's moderator____________\\
-        $q = 'SELECT moderator FROM USER WHERE email = :mail';
+        $q = 'SELECT moderator FROM USER WHERE idUser = :idUser';
         $req = $bdd->prepare($q);
-        $req->execute(['mail' => $mail]);
+        $req->execute(['idUser' => $idUser]);
         $result = $req->fetch(PDO::FETCH_ASSOC);
         $result = $result['moderator'];
-    
+
         if($result == 1){
-            $q = 'UPDATE USER SET moderator = 0 where email = :mail';
+            $q = 'UPDATE USER SET moderator = 0 where idUser = :idUser';
             $req = $bdd->prepare($q);
-            $req->execute(['mail' => $mail]);
-        } else { 
-            $q = 'UPDATE USER SET moderator = 1 where email = :mail';
+            $req->execute(['idUser' => $idUser]);
+        } else {
+            $q = 'UPDATE USER SET moderator = 1 where idUser = :idUser';
             $req = $bdd->prepare($q);
-            $req->execute(['mail' => $mail]);
+            $req->execute(['idUser' => $idUser]);
         }
-        $q = 'SELECT moderator FROM USER WHERE email = :mail';
+        $q = 'SELECT moderator FROM USER WHERE idUser = :idUser';
         $req = $bdd->prepare($q);
-        $req->execute(['mail' => $mail]);
+        $req->execute(['idUser' => $idUser]);
         $result = $req->fetch(PDO::FETCH_ASSOC);
     echo $result['moderator'];
     }
 
     if( isset($_POST['active']) ){
-        
+
         //___________check the value of user's moderator____________\\
-        $q = 'SELECT active FROM USER WHERE email = :mail';
+        $q = 'SELECT active FROM USER WHERE idUser = :idUser';
         $req = $bdd->prepare($q);
-        $req->execute(['mail' => $mail]);
+        $req->execute(['idUser' => $idUser]);
         $result = $req->fetch(PDO::FETCH_ASSOC);
         $result = $result['active'];
-    
+
         if($result == 1){
-            $q = 'UPDATE USER SET active = 0 where email = :mail';
+            $q = 'UPDATE USER SET active = 0 where idUser = :idUser';
             $req = $bdd->prepare($q);
-            $req->execute(['mail' => $mail]);
-        } else { 
-            $q = 'UPDATE USER SET active = 1 where email = :mail';
+            $req->execute(['idUser' => $idUser]);
+        } else {
+            $q = 'UPDATE USER SET active = 1 where idUser = :idUser';
             $req = $bdd->prepare($q);
-            $req->execute(['mail' => $mail]);
+            $req->execute(['idUser' => $idUser]);
         }
-        $q = 'SELECT active FROM USER WHERE email = :mail';
+        $q = 'SELECT active FROM USER WHERE idUser = :idUser';
         $req = $bdd->prepare($q);
-        $req->execute(['mail' => $mail]);
+        $req->execute(['idUser' => $idUser]);
         $result = $req->fetch(PDO::FETCH_ASSOC);
         echo $result['active'];
     }
@@ -74,23 +79,23 @@
             echo 'error : email already exists';
             exit;
         }
-        
-        
-        $q = 'UPDATE USER set email = :newMail WHERE email = :oldMail';
+
+
+        $q = 'UPDATE USER set email = :newMail WHERE idUser = :idUser';
         $req = $bdd->prepare($q);
         $req->execute([
             'newMail' => $_POST['newMail'],
-            'oldMail' => $_POST['mail']
+            'idUser' => $idUser
             ]);
-        
-            $q = 'SELECT email FROM USER WHERE email = ?';
+
+            $q = 'SELECT email FROM USER WHERE idUser = ?';
             $req = $bdd->prepare($q);
-            $req->execute([$_POST['newMail']]);
+            $req->execute([$idUser]);
             $result = $req->fetch(PDO::FETCH_ASSOC);
             echo $result['email'];
-            
+
     }
-    
+
     if(isset($_POST['newLogin'])) {
 
         if( strlen($_POST['newLogin']) < 5 || strlen($_POST['newLogin']) > 16 ){
@@ -98,18 +103,18 @@
             exit;
         }
 
-        $q = 'UPDATE USER set login = :newLogin WHERE email = :mail';
+        $q = 'UPDATE USER set login = :newLogin WHERE idUser = :idUser';
         $req = $bdd->prepare($q);
         $req->execute([
             'newLogin' => $_POST['newLogin'],
-            'mail' => $_POST['mail']
+            'idUser' => $idUser
         ]);
-        $q = 'SELECT login FROM USER WHERE email = ? AND login = ?';
+        $q = 'SELECT login FROM USER WHERE idUser = ? AND login = ?';
         $req = $bdd->prepare($q);
-        $req->execute([$_POST['mail'], $_POST['newLogin']]);
+        $req->execute( [$idUser, $_POST['newLogin'] ] );
         $result = $req->fetch(PDO::FETCH_ASSOC);
         echo $result['login'];
     }
-   
-    
+
+
 ?>

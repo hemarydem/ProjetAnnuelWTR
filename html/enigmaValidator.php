@@ -78,11 +78,11 @@ exit;
 }
 
 //récupérer l'id de l'adhérent
-$q = 'SELECT email FROM USER WHERE login = ?';
+$q = 'SELECT idUser FROM USER WHERE login = ?';
   $req = $bdd->prepare($q);
   $req->execute([ $pseudo ]);
   $result = $req->fetch(PDO::FETCH_ASSOC);
-  $author = $result['email'];
+  $author = $result['idUser'];
 
 
 //préparer les variables
@@ -109,10 +109,6 @@ $req->execute([
                 'enigmaLevel' =>  $level
               ]);
 
-$q = 'SELECT * FROM ENIGMA WHERE title = ?';
-$req = $bdd->prepare($q);
-$req->execute([$title]);
-$result= $req->fetchAll(PDO::FETCH_ASSOC);
 
 //télécharger l'image
   //chemin d'enregistrement

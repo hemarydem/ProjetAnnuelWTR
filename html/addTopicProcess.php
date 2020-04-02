@@ -10,7 +10,7 @@ if( !isset( $_POST['title'] ) ||  !isset( $_POST['content'] ) ){
 
 //get the id of the user
 $pseudo = $_SESSION['pseudo'];
-$q = 'SELECT email FROM USER WHERE login = ?';
+$q = 'SELECT idUser FROM USER WHERE login = ?';
 $req = $bdd->prepare($q);
 $req->execute([$pseudo]);
 $result = $req->fetch(PDO::FETCH_ASSOC);
@@ -19,7 +19,7 @@ $result = $req->fetch(PDO::FETCH_ASSOC);
 $title = htmlspecialchars( $_POST['title'] );
 $content = htmlspecialchars( $_POST['content'] );
 $active = 1;
-$author = $result['email'];
+$author = $result['idUser'];
 $date = date('Y-m-d');
 
 if (!empty($title) && !empty($content) ){

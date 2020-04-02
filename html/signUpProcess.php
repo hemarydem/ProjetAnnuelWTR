@@ -150,9 +150,10 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 //
 //
 /*_______________________________________________*/
+	$levelName = 'beginner';
 	$q = 'SELECT idLevel FROM LEVEL WHERE name = ?';
 	$request = $bdd->prepare($q);
-	$request->execute(['beginner']);
+	$request->execute([$levelName]);
 	$result =  $req->fetch(PDO::FETCH_ASSOC);
 	$userLevel = $result['idLevel'];
 
@@ -175,7 +176,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 //
 /*_________________traitemant image_____________________________________*/
 	if( $_FILES['image']['type'] != NULL ){
-	
+
 		//verifiaction du poids du fichier
 		$maxsize = 1024 * 1024; // 1Mo
 		$acceptable = [
@@ -184,7 +185,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 		  'image/png',
 		  'image/gif'
 		];
-		
+
 		if(!in_array( $_FILES['image']['type'], $acceptable ) ){
 			header('Location:signUp.php?msg=Fichier invalide');
 			exit;
@@ -194,7 +195,7 @@ $specialCars = preg_quote('!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~');
 			exit;
 		}
 	}
-	
+
 /*____________________________________________________________________ */
 //
 //
