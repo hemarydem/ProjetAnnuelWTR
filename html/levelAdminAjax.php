@@ -1,13 +1,13 @@
 <?php
     require('includes/config.php');
     session_start();
-    if( !isset($_POST['mail']) ){
-        echo 'Error: Mail Not found';
+    if( !isset($_POST['levelName']) ){
+        echo 'Error: Level\'s name Not found';
         exit;
     }
 
-    $mail = $_POST['mail'];
-    $req = $bdd->prepare('SELECT idUser FROM USER WHERE email = ?');
+    $level = $_POST['levelName'];
+    $req = $bdd->prepare('SELECT name FROM LEVEL WHERE name = ?');
     $req->execute([$_POST['mail']]);
     $result = $req->fetch(PDO::FETCH_ASSOC);
     $idUser = $result['idUser'];

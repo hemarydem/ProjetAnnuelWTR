@@ -13,6 +13,9 @@ session_start();
         include('includes/header.php');
     ?>
     <main>
+        <?php
+        include('includes/adminHeader.php');
+        ?>
         <div id="searchingContaineur">
             <div > 
                 <input type ="text" name = "wantedUser" id="searchInput" placeholder="mail or pseudo's user">
