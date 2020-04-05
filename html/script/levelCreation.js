@@ -63,6 +63,7 @@ function checkStringLength(string, shortLimit, longerLimit, InputElement) {
     document.getElementById('longer').style.background='177, 15, 15';
     return true;
 }
+
 function checkFormLevel(){
     let checkIsOK = true;
     const inputLevelName = document.getElementById('name').value.trim();
@@ -72,17 +73,17 @@ function checkFormLevel(){
 }
 
 function creationLevel() {
-let request = new XMLHttpRequest();  
+let request = new XMLHttpRequest();
 request.onreadystatechange = function() {
     if(request.readyState == 4) {
         if(request.status == 200) {
-            addline(ObjJson[0]['name'], ObjJson[0]['threshold']);  
+            addline(ObjJson[0]['name'], ObjJson[0]['threshold']);
         } else {
             alert("Error: returned status code " + request.status + " " + request.statusText);
         }
     }
 }
-request.open("POST", "leveCreatProcess.php", true); 
+request.open("POST", "leveCreatProcess.php", true);
 request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 request.send(`name=${LevelName}&threshold=${Levelthreshold}`);
 }

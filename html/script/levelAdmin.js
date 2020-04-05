@@ -42,12 +42,12 @@ function searchLevelByName() {
                 let indice = 1;
                 let input;
                 ObjJson.forEach(element => {
-                    
+
                     //creat a line
                     arraytr[indexTr] = document.createElement('tr');
                     arraytr[indexTr].id = indexTr;
                     table.appendChild(arraytr[indexTr]);
-                    
+
                     //creat a column creation date
                     arrayTd[indexTd] = document.createElement('td');
                     arrayTd[indexTd].innerHTML = element['name'];
@@ -58,7 +58,7 @@ function searchLevelByName() {
                     arrayTd[indexTd].innerHTML = element['threshold'];
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
                     indexTd++;
-                    
+
                     //creat a column
                     arrayTd[indexTd] = document.createElement('td');
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
@@ -77,7 +77,7 @@ function searchLevelByName() {
 
         }
     }
-    request.open("POST", "levelAdminSearch.php", true);    
+    request.open("POST", "levelAdminSearch.php", true);
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	request.send(`levelName=${wantedLevel}&option=${0}`);
 }
@@ -100,12 +100,12 @@ function searchLevelBythreshold() {
                 let indice = 1;
                 let input;
                 ObjJson.forEach(element => {
-                    
+
                     //creat a line
                     arraytr[indexTr] = document.createElement('tr');
                     arraytr[indexTr].id = indexTr;
                     table.appendChild(arraytr[indexTr]);
-                    
+
                     //creat a column creation date
                     arrayTd[indexTd] = document.createElement('td');
                     arrayTd[indexTd].innerHTML = element['name'];
@@ -116,7 +116,7 @@ function searchLevelBythreshold() {
                     arrayTd[indexTd].innerHTML = element['threshold'];
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
                     indexTd++;
-                    
+
                     //creat a column
                     arrayTd[indexTd] = document.createElement('td');
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
@@ -135,7 +135,7 @@ function searchLevelBythreshold() {
 
         }
     }
-    request.open("POST", "levelAdminSearch.php", true);    
+    request.open("POST", "levelAdminSearch.php", true);
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	request.send(`threshold=${wantedThreshold}&option=${1}`);
 }
@@ -159,12 +159,12 @@ function searchLevelByBoth(){
                 let indice = 1;
                 let input;
                 ObjJson.forEach(element => {
-                    
+
                     //creat a line
                     arraytr[indexTr] = document.createElement('tr');
                     arraytr[indexTr].id = indexTr;
                     table.appendChild(arraytr[indexTr]);
-                    
+
                     //creat a column creation date
                     arrayTd[indexTd] = document.createElement('td');
                     arrayTd[indexTd].innerHTML = element['name'];
@@ -175,7 +175,7 @@ function searchLevelByBoth(){
                     arrayTd[indexTd].innerHTML = element['threshold'];
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
                     indexTd++;
-                    
+
                     //creat a column
                     arrayTd[indexTd] = document.createElement('td');
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
@@ -194,10 +194,10 @@ function searchLevelByBoth(){
 
         }
     }
-    request.open("POST", "levelAdminSearch.php", true);    
+    request.open("POST", "levelAdminSearch.php", true);
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	request.send(`levelName=${wantedLevel}&threshold=${wantedThreshold}&option=${3}`);
 }
 function redirectCreationLevel(){
-    window.location.replace("http://localhost:8888/levelCreat.php");//CHANGER POUR INTÉGRATION
+    window.location.href = "levelCreat.php";//CHANGER POUR INTÉGRATION
 }
