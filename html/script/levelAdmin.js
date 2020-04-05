@@ -63,7 +63,7 @@ function searchLevelByName() {
                     arrayTd[indexTd] = document.createElement('td');
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
                     arryInput[indexInput] = document.createElement('a');
-                    arryInput[indexInput].href = 'UserProfile.php?email=' + element['name'] ;
+                    arryInput[indexInput].href = 'levelManage.php?idLevel=' + element['idLevel'] ;
                     arryInput[indexInput].innerHTML = 'Niveau';
                     document.getElementById(indexTr).appendChild(arryInput[indexInput]);
                     indexInput++;
@@ -81,6 +81,7 @@ function searchLevelByName() {
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	request.send(`levelName=${wantedLevel}&option=${0}`);
 }
+
 function searchLevelBythreshold() {
     let wantedThreshold = document.getElementById('wantedThreshold').value;
     let request = new XMLHttpRequest();
@@ -120,7 +121,7 @@ function searchLevelBythreshold() {
                     arrayTd[indexTd] = document.createElement('td');
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
                     arryInput[indexInput] = document.createElement('a');
-                    arryInput[indexInput].href = 'UserProfile.php?email=' + element['name'] ;
+                    arryInput[indexInput].href = 'levelManage.php?idLevel=' + element['idLevel'];
                     arryInput[indexInput].innerHTML = 'Niveau';
                     document.getElementById(indexTr).appendChild(arryInput[indexInput]);
                     indexInput++;
@@ -138,6 +139,7 @@ function searchLevelBythreshold() {
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	request.send(`threshold=${wantedThreshold}&option=${1}`);
 }
+
 function searchLevelByBoth(){
     let wantedThreshold = document.getElementById('wantedThresholdB').value;
     let wantedLevel = document.getElementById('wantedLevelB').value;
@@ -178,7 +180,7 @@ function searchLevelByBoth(){
                     arrayTd[indexTd] = document.createElement('td');
                     document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
                     arryInput[indexInput] = document.createElement('a');
-                    arryInput[indexInput].href = 'UserProfile.php?email=' + element['name'] ;
+                    arryInput[indexInput].href = 'levelManage.php?idLevel=' + element['idLevel'] ;
                     arryInput[indexInput].innerHTML = 'Niveau';
                     document.getElementById(indexTr).appendChild(arryInput[indexInput]);
                     indexInput++;
