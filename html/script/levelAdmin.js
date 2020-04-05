@@ -198,3 +198,6 @@ function searchLevelByBoth(){
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	request.send(`levelName=${wantedLevel}&threshold=${wantedThreshold}&option=${3}`);
 }
+function redirectCreationLevel(){
+    window.location.replace("http://localhost:8888/levelCreat.php");//CHANGER POUR INTÉGRATION
+}

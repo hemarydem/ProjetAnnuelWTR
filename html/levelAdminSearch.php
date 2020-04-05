@@ -1,7 +1,7 @@
 <?php
 require('includes/config.php');
 //___________Search by name______________//
-if(isset($_POST['levelName']) &&$_POST['option'] == 0) {
+if(isset($_POST['levelName']) && $_POST['option'] == 0) {
     $q = "SELECT name, threshold, idLevel FROM LEVEL WHERE name LIKE ?";
     $req = $bdd->prepare($q);
     $unKnowLevel = $_POST['levelName'].'%';

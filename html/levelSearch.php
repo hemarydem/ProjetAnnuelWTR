@@ -16,6 +16,7 @@ session_start();
         <?php
         include('includes/adminHeader.php');
         ?>
+        <button onclick="redirectCreationLevel()">création Niveau</button>
         <div id="searchingContaineur">
             <div > 
                 <h1>by name</h1> 

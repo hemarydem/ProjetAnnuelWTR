@@ -33,6 +33,7 @@ session_start();
                 echo '<p>id: <p id="idLevel">' . $idLevel .'</p></p><br>';
                 echo '<p>Nom: <p id="name">' . $results['name'] .'</p></p><input id="newName" type:"text" name ="newName" placeholder="nouveau Nom">' . '<button onclick="changeLevelName()">change Level Name</button></p> <br>';
                 echo '<p>Seuil d\'expérience: <p id="threshold" >' . $results['threshold'] . '</p><input id="newThreshold" type:"text" name ="newThreshold" placeholder="nouveau seuil"><button onclick="changeThreshold()">change threshold</button> </p> <br>';
+                echo '<p>supprimer niveau:</p><p>taper 1 dans la case et cliquer sur supprimer<input id="supp" type:"text" name ="supp" placeholder=" taper 1 pour supprimer">' . '<button onclick="suppLevel()"> suppLevel</button></p> <br>';
             }else{
                 header('location: searchUser.php');
                 exit;

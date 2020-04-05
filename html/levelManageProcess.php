@@ -58,4 +58,26 @@
          $result = $req->fetch(PDO::FETCH_ASSOC);
         echo $result['threshold'];
  }
+
+ if( isset($_POST['option'])) {
+    if ($_POST['option'] == 1 ) {
+        //----delete the level--------------------//
+        $q = 'DELETE FROM LEVEL where idLevel = :id';
+        $req = $bdd->prepare($q);
+        $req->execute(['id' => $idLevel]);
+    
+        //-------check if the level was well deleted-----//
+        $q = 'SELECT name FROM LEVEL WHERE idLevel = :id';
+        $req = $bdd->prepare($q);
+        $req->execute(['id' => $idLevel]);
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+        if( $result == false){
+             echo 1; //succes
+        } else {
+            echo 0;// error
+        }
+    }else {
+        echo 2;// error
+    }
+ }
 ?>
