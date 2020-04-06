@@ -31,7 +31,12 @@ session_start();
             <br>
             <label>seuil niveau</label>
             <input type="text"id='threshold' placeholder="rentrer le seuil numérique du niveau">
-            <button onclick="creationLevel()"></button>
+            <div>
+                <div>
+                    <p>est un numéro </p><div id="isNumber" class="circle"></div>
+                    </div>
+                </div>
+            <button onclick="checkFormLevel()"></button>
         </div>
        <div id="createdToDay"></div>
         <script src="script/levelCreation.js"></script>
