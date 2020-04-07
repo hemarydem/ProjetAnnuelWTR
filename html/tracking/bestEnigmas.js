@@ -48,15 +48,15 @@ function browseXML(xml){
 
 function createLine(title, mark){
   const table = document.getElementById('bestEnigmasTable');
-    const line = document.createElement('tr');
+  const line = document.createElement('tr');
 
-      const columnTitle = document.createElement('td');
-      columnTitle.innerHTML = title;
-    line.appendChild(columnTitle);
+  const columnTitle = document.createElement('td');
+  columnTitle.innerHTML = title;
+  line.appendChild(columnTitle);
 
-      const columnMark = document.createElement('td');
-      columnMark.innerHTML = mark;
-    line.appendChild(columnMark);
+  const columnMark = document.createElement('td');
+  columnMark.innerHTML = mark;
+  line.appendChild(columnMark);
 
   table.appendChild(line);
 

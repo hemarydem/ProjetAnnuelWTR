@@ -47,15 +47,15 @@ function browseXML(xml){
 
 function createLine(login, points){
   const table = document.getElementById('bestPlayersTable');
-    const line = document.createElement('tr');
+  const line = document.createElement('tr');
 
-      const columnLogin = document.createElement('td');
-      columnLogin.innerHTML = login;
-    line.appendChild(columnLogin);
+  const columnLogin = document.createElement('td');
+  columnLogin.innerHTML = login;
+  line.appendChild(columnLogin);
 
-      const columnPoints = document.createElement('td');
-      columnPoints.innerHTML = points;
-    line.appendChild(columnPoints);
+  const columnPoints = document.createElement('td');
+  columnPoints.innerHTML = points;
+  line.appendChild(columnPoints);
 
   table.appendChild(line);
 
