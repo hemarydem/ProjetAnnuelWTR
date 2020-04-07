@@ -21,15 +21,15 @@ function requestBestLevels(idLevel){
   request.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       let xml = this.responseText;
-      browseXML(xml);
+      browseXMLEnigmas(xml);
     }
-  };
+  }
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   request.send(`idLevel=${idLevel}`);
 }
 
 
-function browseXML(xml){
+function browseXMLEnigmas(xml){
   const parser = new DOMParser();
   let xmlDoc = parser.parseFromString(xml,"text/xml");
   let enigmasXML = xmlDoc.getElementsByTagName("enigmas");
@@ -39,25 +39,25 @@ function browseXML(xml){
     for(let i = 0; i < enigmas.length; i++){
       let title = enigmas[i].childNodes[0].innerHTML;
       let mark = enigmas[i].childNodes[1].innerHTML;
-      createLine(title, mark);
+      createLineEnigmas(title, mark);
 
     }
   }
 }
 
 
-function createLine(title, mark){
-  const table = document.getElementById('bestEnigmasTable');
-  const line = document.createElement('tr');
+function createLineEnigmas(title, mark){
+  const tableEnigmas = document.getElementById('bestEnigmasTable');
+    const lineEnigma = document.createElement('tr');
 
-  const columnTitle = document.createElement('td');
-  columnTitle.innerHTML = title;
-  line.appendChild(columnTitle);
+      const columnTitle = document.createElement('td');
+      columnTitle.innerHTML = title;
+    lineEnigma.appendChild(columnTitle);
 
-  const columnMark = document.createElement('td');
-  columnMark.innerHTML = mark;
-  line.appendChild(columnMark);
+      const columnMark = document.createElement('td');
+      columnMark.innerHTML = mark;
+    lineEnigma.appendChild(columnMark);
 
-  table.appendChild(line);
+  tableEnigmas.appendChild(lineEnigma);
 
 }
