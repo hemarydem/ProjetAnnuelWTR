@@ -25,6 +25,10 @@ if( !isset( $_SESSION['pseudo'] ) || $_SESSION['pseudo'] != 'administrateur' ){
         <section>
           <div class="topPlayers">
             <h1>Meilleurs Joueurs</h1>
+              <div class="slideContainer">
+                <input id="slideTopPlayers" type="range" min="1" max="20" value="5">
+                <label id="nbTop" for="slideTopPlayers"></label>
+              </div>
               <table>
                 <thead>
                   <tr>
@@ -32,25 +36,39 @@ if( !isset( $_SESSION['pseudo'] ) || $_SESSION['pseudo'] != 'administrateur' ){
                     <th>Points</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <?php
+                <tbody id="bestPlayersTable">
 
-                    $q = 'SELECT login,points FROM USER ORDER BY points DESC LIMIT 5';
-                    $req = $bdd->query($q);
-                    $results = $req->fetchAll(PDO::FETCH_ASSOC);
-
-                    foreach ($results as $key => $value) {
-                      echo '
-                        <tr>
-                          <td> ' . $value['login'] . ' </td>
-                          <td> ' . $value['points'] . ' </td>
-                        </tr>
-                      ';
-                    }
-
-                  ?>
                 </tbody>
               </table>
+
+          </div>
+        </section>
+        <section>
+          <div class="bestEnigmasPerLevel">
+            <h1>Les énigmes les mieux notées par niveau</h1>
+
+            <select id="levels">
+              <?php
+                $req = $bdd->query('SELECT name,idLevel FROM LEVEL');
+                $results = $req->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($results as $key => $value) {
+                  echo '<option value=' . $value['idLevel'] .'>' . $value['name'] . '</option>';
+                }
+              ?>
+            </select>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Titre</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody id="bestEnigmasTable">
+
+              </tbody>
+            </table>
 
           </div>
         </section>
@@ -120,8 +138,42 @@ if( !isset( $_SESSION['pseudo'] ) || $_SESSION['pseudo'] != 'administrateur' ){
 
           </div>
         </section>
+        <section>
+          <div class="enigmasSolvedPerDay">
+            <h1>Nombre d'énigmes résolues par jour</h1>
+
+            <table style="display: block;width: 400px;height: 300px; overflow: scroll;">
+              <thead>
+                <tr>
+                  <th>nb d'énigmes résolues</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+
+                  $q = 'SELECT CAST(datePlay AS DATE) AS date, COUNT(user) AS played FROM PLAY WHERE solves = 1 GROUP BY date ORDER BY date DESC';
+                  $req = $bdd->query($q);
+                  $results = $req->fetchAll(PDO::FETCH_ASSOC);
+
+                  foreach ($results as $key => $value) {
+                    echo '
+                      <tr>
+                      <td> ' . $value['played'] . ' </td>
+                        <td> ' . $value['date'] . ' </td>
+                      </tr>
+                    ';
+                  }
+
+                ?>
+              </tbody>
+            </table>
+
+          </div>
+        </section>
     </main>
 
-
+    <script type="text/javascript" src="tracking/bestEnigmas.js"></script>
+    <script type="text/javascript" src="tracking/topPlayers.js"></script>
 </body>
 </html>
