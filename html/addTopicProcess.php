@@ -34,7 +34,7 @@ if (!empty($title) && !empty($content) ){
 				]);
 
 }else{
-    header('location: creationTopic.php?msg=Remplissez les champs');
+    header('location:creationTopic.php?msg=Remplissez les champs');
     exit;
 }
 

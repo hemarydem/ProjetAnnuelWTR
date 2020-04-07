@@ -16,8 +16,6 @@
 				$q = 'SELECT idTopic, title, content FROM TOPIC ORDER BY idTopic DESC';
 				$req = $bdd->prepare($q);
 				$req->execute();
-				//$result = $req->fetchAll(PDO::FETCH_ASSOC);
-				//var_dump($result);
 				
 				while($result=$req->fetch()) {?>
 				<a href="pageTopic.php?topic=<?php echo $result['idTopic'] ?>">

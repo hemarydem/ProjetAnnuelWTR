@@ -30,7 +30,7 @@
         <form method="post" id="formTopic" action="addTopicProcess.php">
           <input type="text" name="title" placeholder="Titre" required>
           <textarea name="content" rows="8" cols="80" placeholder="Description..." required></textarea>
-          <input type="submit" name="formTopic" value="Publier">
+          <input type="submit" name="formTopic" value="Publier"/>
         </form>
 
 		
