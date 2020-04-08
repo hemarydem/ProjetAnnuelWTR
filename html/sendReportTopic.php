@@ -21,14 +21,27 @@
     date_default_timezone_set('Europe/Paris');
     $date = date('d-m-y h:i:s');
 
-    $reason = 
+    $reason = ($_POST['reason']);
     $details = htmlspecialchars($_POST['details']);
 
 
     if(!empty($details)){
 
-        $q = "";
+        $q = "INSERT INTO topicreport(reporter, topic, reportDate, reason, details) VALUES (:reporter, :topic, :reportDate, :reason, :details)";
+        $req = $bdd->prepare($q);
+        $req->execute([
+                        'reporter'      => $reporter,
+                        'topic'         => $topic,
+                        'reportDate'    => $date,
+                        'reason'        => $reason,
+                        'details'       => $details
+                    ]);
 
+    }else{
+        header('location:report.php?msg=Remplissez tout les champs');
+        exit;
     }
 
+    header('location:forum.php?');
+    exit;
 ?>

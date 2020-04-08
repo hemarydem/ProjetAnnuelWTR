@@ -33,7 +33,7 @@
 
                     <?php
                     while($listReasons=$reason->fetch()) { ?>
-                    <option><?= $listReasons['reason'] ?></option>
+                    <option value="<?= $listReasons['idReason'] ?>"><?= $listReasons['reason'] ?></option>
                     <?php } ?>
 
                 </select>
