@@ -25,10 +25,14 @@
 
 			//connection
 			$datetime = date('Y-m-d H:i:s');
-			$q = "INSERT INTO CONNECTION(dateConnection, user) VALUES(:dateConnection, :user)";
+
+			$ipLength = strlen( $_SERVER['REMOTE_ADDR'] ); // length max ipv6 = 39.  But ipv4 scoring ipv6 length max 45
+			$ipUser = $ipLength < 0 || $ipLength > 45 ? 0 : $_SERVER['REMOTE_ADDR'];
+			$q = "INSERT INTO CONNECTION(dateConnection, ipUser, user) VALUES(:dateConnection, :ipUser, :user)";
 			$req = $bdd->prepare($q);
 			$req->execute([
 				'dateConnection' => $datetime,
+				'ipUser' => $ipUser,
 				'user' => $idUser
 			]);
 

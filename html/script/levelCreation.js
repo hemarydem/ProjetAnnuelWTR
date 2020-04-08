@@ -1,4 +1,4 @@
-printheadTable ();
+ printheadTable ();
 //get information from both inputs
 const LevelName = document.getElementById('name');
 //LevelName.addEventListener('input',checkFormLevel);
@@ -6,7 +6,7 @@ const LevelName = document.getElementById('name');
 const Levelthreshold = document.getElementById('threshold');
 //Levelthreshold.addEventListener('input',checkFormLevel);
 
-let circleNume = document.getElementById('isNumber'); 
+let circleNume = document.getElementById('isNumber');
 let CircleShort = document.getElementById('shorter');
 let circleLonger = document.getElementById('longer');
 
@@ -114,7 +114,7 @@ function creationLevel(strName, strThreshold) {
                 addline(ObjJson[0]['name'], ObjJson[0]['threshold'], tr);
                 tr++;
                 console.log(tr);
-                
+
             } else {
                 alert("Error: returned status code " + request.status + " " + request.statusText);
             }
