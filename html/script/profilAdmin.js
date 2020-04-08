@@ -1,3 +1,4 @@
+//this file is also use for repporthandling.php
 let mail =  document.getElementById('mail').innerHTML;
 
 
@@ -84,4 +85,42 @@ function changeLogin() {
 	request.open("POST", "profilAjaxProcess.php", true); 
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send(`mail=${mail}&newLogin=${newLogin}`);
+}
+
+	 //for repporthandling.php
+function suppTopic() {
+	let idTopic = document.getElementById('numId').innerHTML;
+	console.log(idTopic);
+	let request = new XMLHttpRequest();  
+	request.open("POST", "reportHandlingAjaxProcess.php", true); 
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
+                let containeurActive = document.getElementById('active');
+				containeurActive.innerHTML = request.response; 
+			} else {
+				alert("Error: returned status code " + request.status + " " + request.statusText);
+			}
+		}
+	}
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`idTopic=${idTopic}&option=${1}`);
+}
+
+function keepTopic() {
+	let idTopic = document.getElementById('numId').innerHTML;
+	let reportAuthor = document.getElementById('author').innerHTML;
+	let request = new XMLHttpRequest();  
+	request.open("POST", "reportHandlingAjaxProcess.php", true); 
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
+				window.location.href='reportList.php';
+			} else {
+				alert("Error: returned status code " + request.status + " " + request.statusText);
+			}
+		}
+	}
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`idTopic=${idTopic}&reporter=${reportAuthor}&option=${2}`);
 }
