@@ -38,6 +38,7 @@ session_start();
                 $req->execute([$_GET['reporter']]);
                 $results = $req->fetch(PDO::FETCH_ASSOC);
 
+                echo '<p>Id: <p id="idRepoter">' . $_GET['reporter'] ;
                 echo '<p>email: <p id="mail">' . $results['email'] ;
                 echo '<p>login: <p id="login" >' . $results['login'] ;
                 echo '<p>moderator: <p id="moderator">' . $results['moderator'] . ' </p> <button onclick="changeModerator()">change</button> </p> <br>';

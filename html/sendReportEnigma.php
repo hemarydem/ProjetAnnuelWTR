@@ -3,20 +3,20 @@
     require('includes/config.php');
     session_start();
 
-    if( !isset( $_POST['reason'] )) { //||  !isset( $_POST['details'] ) ){
-        header('Location:report.php?msg= Remplissez tout les champs');
+    if( !isset( $_POST['reason'] )){
+        header('Location:report.php?msg= selectionner une raison');
         exit;
     }
 
-    //get the user's id
+    //get the users id
     $pseudo = $_SESSION['pseudo'];
     $q = 'SELECT idUser FROM USER WHERE login = ?';
     $req = $bdd->prepare($q);
     $req->execute([$pseudo]);
     $result = $req->fetch(PDO::FETCH_ASSOC);
-    
+    print_r($result);
     $reporter = $result['idUser'];
-    $topic = $_GET['idTopic'];
+    $enigma = $_GET['idEnigma'];
 
     date_default_timezone_set('Europe/Paris');
     $date = date('d-m-y h:i:s');
@@ -25,21 +25,19 @@
     //$details = htmlspecialchars($_POST['details']);
 
 
-    if(!empty($details)){
+    if(!empty($reason)){
 
-        //$q = "INSERT INTO topicreport(reporter, topic, reportDate, reason, details) VALUES (:reporter, :topic, :reportDate, :reason, :details)";
-        $q = "INSERT INTO topicreport(reporter, topic, reportDate, reason) VALUES (:reporter, :topic, :reportDate, :reason)";
+        $q = "INSERT INTO ENIGMAREPORT(reporter, enigma, reportDate, reason) VALUES (:reporter, :enigma, :reportDate, :reason)";
         $req = $bdd->prepare($q);
         $req->execute([
                         'reporter'      => $reporter,
-                        'topic'         => $topic,
+                        'enigma'         => $enigma,
                         'reportDate'    => $date,
-                        'reason'        => $reason//,
-                        //'details'       => $details
+                        'reason'        => $reason
                     ]);
-
+                
     }else{
-        header('location:report.php?msg=Remplissez tout les champs');
+        header('location:sendReportEnigma.php?msg=Remplissez tout les champs');
         exit;
     }
 

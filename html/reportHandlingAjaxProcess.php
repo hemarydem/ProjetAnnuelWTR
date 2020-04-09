@@ -1,10 +1,9 @@
 <?php
 require('includes/config.php');
-
+//----------------turn off a topic----------------//
 if(isset($_POST['idTopic']) && $_POST['option'] == 1){
     $req = $bdd->prepare('UPDATE Topic SET active = 0 WHERE idTopic = :id');
     $req->execute([ 'id' => $_POST['idTopic']]);
-
 
     $req = $bdd->prepare('SELECT  active FROM Topic WHERE idTopic = ?');
                 $req->execute([ $_POST['idTopic'] ]);

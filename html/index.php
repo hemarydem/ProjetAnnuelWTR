@@ -21,7 +21,7 @@
 			<?php
 
 
-			$q = 'SELECT title,description FROM ENIGMA ORDER BY idEnigma DESC';
+			$q = 'SELECT idEnigma, title,description FROM ENIGMA ORDER BY idEnigma DESC';
 			$req = $bdd->query($q);
 			$results = $req->fetchAll(PDO::FETCH_ASSOC);
 
@@ -34,9 +34,9 @@
 
 					echo "<h1>" . $results[$i]['title'] . "</h1><br>";
 					echo "<p>" . $results[$i]['description'] . "</p>";
-
+					echo '<p><a href="reportEnigmaForm.php?idEnigma=' . $results[$i]['idEnigma'] . '">Signaler</a></p>';
 				echo "</div>";
-
+				
 				echo "</section>";
 
 			}

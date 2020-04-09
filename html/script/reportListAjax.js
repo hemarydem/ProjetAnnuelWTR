@@ -42,6 +42,7 @@ function addlineRepport(array, numtr) {
      table.appendChild(newTR);
 
     //each loop create a column
+    console.log(array);
      for(let tabColum = 0; tabColum < array.length ; tabColum++) {
         //don't need to display topic id and reporter id
         if(tabColum <= 3) {
@@ -53,7 +54,7 @@ function addlineRepport(array, numtr) {
             indexTd++;
 
         } else {
-
+            //creat the link for handling the report
             let arryInput = [];
             indexInput = 0;
             arrayTd[indexTd] = document.createElement('td');
@@ -70,7 +71,7 @@ function addlineRepport(array, numtr) {
 //launch http request to creat the level
 function searchReportTopic() {
     let request = new XMLHttpRequest();
-    request.open("GET", "reportListAjax.php", true);
+    request.open("GET", "reportListAjax.php?option=" + 1, true);
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200) {
@@ -100,3 +101,37 @@ function searchReportTopic() {
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send();
 }
+
+ function searchReportEnigma() {
+    let request = new XMLHttpRequest();
+    //option is the data to active the well part on the php file
+    request.open("GET", "reportListAjax.php?option=" + 2, true);
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            if(request.status == 200) {
+                let ObjJson = JSON.parse(request.responseText);
+                let trigger = 0;
+                
+                ObjJson.forEach(element => {
+                    //here it's store data of the line
+                    let array = [element['title'],element['login'] ,element['reason'], element['reportDate'], element['topic'], element['reporter']];
+                    
+                    //here set the titles of your columns
+                    let title =['topic', 'reporter', 'reason', 'reportDate'];
+                    
+                    //only nead to creat one time printheaTable
+                    if(trigger == 0){
+                        printheadTable (title);
+                        trigger++;
+                    }
+                    addlineRepport(array, tr);
+                    tr++;
+                });
+            } else {
+                alert("Error: returned status code " + request.status + " " + request.statusText);
+            }
+        }
+    }
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send();
+ }
