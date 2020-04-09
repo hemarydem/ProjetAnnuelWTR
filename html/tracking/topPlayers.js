@@ -4,11 +4,13 @@ printValueSlider();
 //print the number selected
 const slider = document.getElementById('slideTopPlayers');
 requestBestPlayers(slider.value);
-slider.oninput = function printValueSlider(){
+slider.addEventListener('input', printValueSlider );
+slider.addEventListener('change',function (){
+  printValueSlider();
   const nbTop = document.getElementById('nbTop');
   nbTop.innerHTML = slider.value;
   requestBestPlayers(slider.value);
-};
+});
 function printValueSlider(){
   document.getElementById('nbTop').innerHTML = document.getElementById('slideTopPlayers').value;
 }
