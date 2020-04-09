@@ -1,6 +1,22 @@
 <?php
 	session_start();
 	require('includes/config.php');
+
+	if( !isset( $_SESSION['pseudo'] ) ){
+		$idLevel = 1;
+	}else{
+		$q = '
+			SELECT idLevel FROM LEVEL
+			INNER JOIN USER ON USER.login = ?
+			WHERE threshold <= USER.points
+			ORDER BY threshold DESC
+			LIMIT 1
+		';
+		$req = $bdd->prepare($q);
+		$req->execute([ $_SESSION['pseudo'] ]);
+		$idLevel = $req->fetch(PDO::FETCH_ASSOC)['idLevel'];
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +37,15 @@
 			<?php
 
 
-			$q = 'SELECT idEnigma, title,description FROM ENIGMA ORDER BY idEnigma DESC';
-			$req = $bdd->query($q);
+			$q = '
+			SELECT idEnigma,title,description,enigmaLevel, ROUND(AVG(PLAY.mark) ,1) AS mark FROM ENIGMA
+				LEFT JOIN PLAY ON enigma = idEnigma
+				WHERE enigmaLevel = ?
+				GROUP BY idEnigma
+				ORDER BY creationDate DESC
+			';
+			$req = $bdd->prepare($q);
+			$req->execute([ $idLevel ]);
 			$results = $req->fetchAll(PDO::FETCH_ASSOC);
 
 			for ($i=0; $i < count($results); $i++) {
@@ -34,9 +57,10 @@
 
 					echo "<h1>" . $results[$i]['title'] . "</h1><br>";
 					echo "<p>" . $results[$i]['description'] . "</p>";
+					echo $results[$i]['mark'] == NULL ? 'Enigme inédite !': $results[$i]['mark'];
 					echo '<p><a href="reportEnigmaForm.php?idEnigma=' . $results[$i]['idEnigma'] . '">Signaler</a></p>';
 				echo "</div>";
-				
+
 				echo "</section>";
 
 			}
