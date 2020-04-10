@@ -28,7 +28,7 @@
 
       <h1><?= $resultTopic['title']?></h1>
 	  <p><?= $resultTopic['content']?></p>
-	  <a href="report.php?idTopic=<?= $_GET['topic']?>">Signaler</a>
+	  <a href="reportTopic.php?idTopic=<?= $_GET['topic']?>">Signaler</a>
 
     </main>   
   </body>

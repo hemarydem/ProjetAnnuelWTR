@@ -24,6 +24,14 @@
     $reason = ($_POST['reason']);
     $details = htmlspecialchars($_POST['details']);
 
+    $q = 'SELECT reporter, topic FROM topicreport WHERE reporter = ? AND topic=?';
+    $req = $bdd->prepare($q);
+    $req->execute([$reporter, $topic]);
+    $result = $req->fetchAll(PDO::FETCH_ASSOC);
+    if(count($result) > 0){
+		header('Location:reportTopic.php?msg=vous avez déjà signaler ce topic&idTopic=' . $_GET['idTopic']);
+		exit;
+	}
 
     if(!empty($details)){
 
