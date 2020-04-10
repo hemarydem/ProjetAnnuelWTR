@@ -46,7 +46,7 @@
                     ]);
 
     }else{
-        header('location:report.php?msg=Remplissez tout les champs');
+        header('location:reportTopic.php?msg=Remplissez tout les champs');
         exit;
     }
 
