@@ -32,8 +32,8 @@
                     <option selected="selected" disabled="disabled">Selectionner un motif</option>
 
                     <?php
-                    while($listReasons=$reason->fetch()) { ?>
-                    <option value="<?= $listReasons['idReason'] ?>"><?= $listReasons['reason'] ?></option>
+                    while($reasons=$reason->fetch()) { ?>
+                    <option value="<?= $reasons['idReason'] ?>"><?= $reasons['reason'] ?></option>
                     <?php } ?>
 
                 </select>

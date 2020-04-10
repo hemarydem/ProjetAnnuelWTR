@@ -3,12 +3,12 @@
     require('includes/config.php');
     session_start();
 
-    if( !isset( $_POST['reason'] )) { //||  !isset( $_POST['details'] ) ){
+    if( !isset( $_POST['reason'] ) ||  !isset( $_POST['details'] ) ){
         header('Location:report.php?msg= Remplissez tout les champs');
         exit;
     }
 
-    //get the user's id
+    //Récupérer l'id de l'utilisateurs
     $pseudo = $_SESSION['pseudo'];
     $q = 'SELECT idUser FROM USER WHERE login = ?';
     $req = $bdd->prepare($q);
@@ -22,20 +22,19 @@
     $date = date('d-m-y h:i:s');
 
     $reason = ($_POST['reason']);
-    //$details = htmlspecialchars($_POST['details']);
+    $details = htmlspecialchars($_POST['details']);
 
 
     if(!empty($details)){
 
-        //$q = "INSERT INTO topicreport(reporter, topic, reportDate, reason, details) VALUES (:reporter, :topic, :reportDate, :reason, :details)";
-        $q = "INSERT INTO topicreport(reporter, topic, reportDate, reason) VALUES (:reporter, :topic, :reportDate, :reason)";
+        $q = "INSERT INTO topicreport(reporter, topic, reportDate, reason, details) VALUES (:reporter, :topic, :reportDate, :reason, :dtl)";
         $req = $bdd->prepare($q);
         $req->execute([
                         'reporter'      => $reporter,
                         'topic'         => $topic,
                         'reportDate'    => $date,
-                        'reason'        => $reason//,
-                        //'details'       => $details
+                        'reason'        => $reason,
+                        'dtl'           => $details
                     ]);
 
     }else{
