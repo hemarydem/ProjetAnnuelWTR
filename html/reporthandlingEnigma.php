@@ -17,27 +17,40 @@ session_start();
         <?php
 
 
-            if(isset($_GET['topic'])) {
+            if(isset($_GET['enigma'])) {
 
-                $req = $bdd->prepare('SELECT title, content, active, postDate, author FROM Topic WHERE idTopic = ?');
-                $req->execute([ $_GET['topic'] ]);
+                $req = $bdd->prepare('SELECT title, description, active,trick,profilePicture, gain, creationDate, author FROM ENIGMA WHERE idEnigma = ?');
+                $req->execute([ $_GET['enigma'] ]);
                 $result = $req->fetchAll(PDO::FETCH_ASSOC);
                 
 
                 echo '<h1>'. $result[0]['title'] . '</h1> <br>';
-                echo' <p>' . $result[0]['content'] . '</p> <br>';
+                echo' <p>' . $result[0]['description'] . '</p> <br>';
                 echo' <p id="active"> Est actif ' . $result[0]['active'] . '</p> <br>';
-                echo' <p>' . $result[0]['postDate'] . '</p> <br>';
+                echo' <p>' . $result[0]['creationDate'] . '</p> <br>';
                 echo' <p id="author">' . $result[0]['author'] . '</p> <br>';
-                echo '<p id=\'numId\'>' . $_GET['topic'] . '</p> <br>';
-                echo '<button onclick=\'suppTopic()\'>supprimer Topic</button><br>';
-                echo '<button onclick=\'keepTopic()\'>garder</button><br>';
+                echo '<p>.id :<p id=\'numId\'>' . $_GET['enigma'] . '</p> </p><br>';
+                echo '<button onclick=\'suppEnigma()\'>supprimer enigme</button><br>';
+                echo '<button onclick=\'keepEnigma()\'>garder</button><br>';
+                
+                $q = 'SELECT email, login, moderator, active, userLevel, creationDate FROM USER WHERE idUser=?';
+                $req = $bdd->prepare($q);
+                $req->execute([$result[0]['author']]);
+                $results = $req->fetch(PDO::FETCH_ASSOC);
+                echo '<h1>auteru de l\'enigme</h1>';
+                echo '<p>Id: <p>' . $_GET['reporter'].'</p>';
+                echo '<p>email: <p id = "emailBadUser">' . $results['email']. '</p>';
+                echo '<p>login: <p>' . $results['login'].'</p>' ;
+                echo '<p>moderator: <p>' . $results['moderator'].'</p>';
+                echo '<p>active: <p>' . $results['active'] . '</p> </p><br>';;
+                echo '<p>level: <p>' . $results['userLevel'] . '</p> </p> <br>';
+                echo '<p>Creation Date: <p id="date">' . $results['creationDate'] . '</p> </p> <br>';
 
                 $q = 'SELECT email, login, moderator, active, userLevel, creationDate FROM USER WHERE idUser=?';
                 $req = $bdd->prepare($q);
                 $req->execute([$_GET['reporter']]);
                 $results = $req->fetch(PDO::FETCH_ASSOC);
-
+                echo '<h1>la personne qui a signaler</h1>';
                 echo '<p>Id: <p id="idRepoter">' . $_GET['reporter'] ;
                 echo '<p>email: <p id="mail">' . $results['email'] ;
                 echo '<p>login: <p id="login" >' . $results['login'] ;

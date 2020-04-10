@@ -4,7 +4,7 @@
     session_start();
 
     if( !isset( $_POST['reason'] )){
-        header('Location:report.php?msg= selectionner une raison');
+        header('Location:sendReportEnigma.php?msg= selectionner une raison');
         exit;
     }
 
@@ -24,6 +24,14 @@
     $reason = ($_POST['reason']);
     //$details = htmlspecialchars($_POST['details']);
 
+    $q = 'SELECT reporter, enigma FROM ENIGMAREPORT WHERE reporter = ? AND enigma=?';
+    $req = $bdd->prepare($q);
+    $req->execute([$reporter, $enigma]);
+    $result = $req->fetchAll(PDO::FETCH_ASSOC);
+    if(count($result) > 0){
+		header('Location:reportEnigmaForm.php?msg=vous avez déjà signaler cette énigme&idEnigma='.$_GET['idEnigma']);
+		exit;
+	}
 
     if(!empty($reason)){
 
@@ -41,6 +49,6 @@
         exit;
     }
 
-    header('location:forum.php?');
+    header('location:index.php?');
     exit;
 ?>

@@ -24,7 +24,7 @@
             if(isset($_GET['msg'])) {
 				echo $_GET['msg'];
 			}
-            print_r($_SESSION);
+            
         ?>
 
             <form method="POST" id="formReport" action="sendReportEnigma.php?idEnigma=<?=$_GET['idEnigma']?>">

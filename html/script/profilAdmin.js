@@ -86,6 +86,7 @@ function changeLogin() {
 
 function suppTopic() {
 	let idTopic = document.getElementById('numId').innerHTML;
+	let reportAuthor = document.getElementById('idRepoter').innerHTML;
 	console.log(idTopic);
 	let request = new XMLHttpRequest();  
 	request.open("POST", "reportHandlingAjaxProcess.php", true); 
@@ -93,14 +94,15 @@ function suppTopic() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
                 let containeurActive = document.getElementById('active');
-				containeurActive.innerHTML = request.response; 
+				containeurActive.innerHTML = request.response;
+				window.location.href='reportList.php';
 			} else {
 				alert("Error: returned status code " + request.status + " " + request.statusText);
 			}
 		}
 	}
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    request.send(`idTopic=${idTopic}&option=${1}`);
+    request.send(`idTopic=${idTopic}&reporter=${reportAuthor}&option=${1}`);
 }
 
 function keepTopic() {
@@ -119,4 +121,49 @@ function keepTopic() {
 	}
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send(`idTopic=${idTopic}&reporter=${reportAuthor}&option=${2}`);
+}
+
+
+
+function suppEnigma() {
+	let idEnigma = document.getElementById('numId').innerHTML;
+	let reportAuthor = document.getElementById('idRepoter').innerHTML;
+	let badUser = document.getElementById('emailBadUser').innerHTML;
+	console.log(idEnigma);
+	console.log(reportAuthor);
+	let request = new XMLHttpRequest();  
+	request.open("POST", "reportHandlingAjaxProcess.php", true); 
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
+				let containeurActive = document.getElementById('active');
+				console.log(containeurActive);
+				
+				containeurActive.innerHTML = request.response;
+				window.location.href='UserProfile.php?email=' + badUser;
+			} else {
+				alert("Error: returned status code " + request.status + " " + request.statusText);
+			}
+		}
+	}
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`idEnigma=${idEnigma}&reporter=${reportAuthor}&option=${3}`);
+}
+
+function keepEnigma() {
+	let idEnigma = document.getElementById('numId').innerHTML;
+	let reportAuthor = document.getElementById('idRepoter').innerHTML;
+	let request = new XMLHttpRequest();  
+	request.open("POST", "reportHandlingAjaxProcess.php", true); 
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
+				window.location.href='reportList.php';
+			} else {
+				alert("Error: returned status code " + request.status + " " + request.statusText);
+			}
+		}
+	}
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`idEnigma=${idEnigma}&reporter=${reportAuthor}&option=${4}`);
 }

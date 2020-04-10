@@ -20,7 +20,7 @@ session_start();
         <div id="searchingButtonContaineur">
             <button onclick="searchReportTopic()"> afficher topic reporter</button>
             <button onclick="searchReportEnigma()"> afficher enigme reporter</button>
-            <button onclick="">both search</button>
+            <button onclick="searchReportMessage()"> afficher message reporter</button>
         </div>
         <div id="mother">
         </div>
