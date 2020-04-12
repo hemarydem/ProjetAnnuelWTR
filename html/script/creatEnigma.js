@@ -23,17 +23,24 @@ function suppAnswer(idInput, idButton) {
     container.removeChild(elementTosupp2);
 }
 
-function messageError(idContaineur, strMessag) {
+function messageError(idContaineur, strMessag, strIdmessage) {
     let container = document.getElementById(idContaineur);
-    let messagesArray = container.getElementsByTagName('p');
-    container.appendChild(messagesArray);
+    let lastmessage = document.getElementById(strIdmessage);
+    if( lastmessage ) container.removeChild(lastmessage);
     let message = document.createElement('p');
+    message.id = strIdmessage;
     message.innerHTML = strMessag;
     container.appendChild(message);
 }
 
+function supp(iDcontainer,strIdmessage){
+    let container = document.getElementById(iDcontainer);
+    let lastmessage = document.getElementById(strIdmessage);
+    container.removeChild(lastmessage);
+};
 
-function checkStringLength( shortLimit, longerLimit, idInput) {
+
+function checkStringLength( shortLimit, longerLimit, idInput, idMsg, idcontainer) {
     const input = document.getElementById(idInput);
     const string = input.value;
     
@@ -41,16 +48,19 @@ function checkStringLength( shortLimit, longerLimit, idInput) {
         //too short
         if(string.length < shortLimit) {
             input.style.border='2px solid #FF0000';//red
-            messageError(idInput + 'Container', 'Trop court');
+            messageError(idInput + 'Container', 'Trop court', idMsg );
             
             return false;
         //too long
         } else if (string.length > longerLimit) {
             input.style.border="2px solid #ff7979";//red
+            messageError(idInput + 'Container', 'Trop long', idMsg);
             return false;
         }
         // ok
+        supp(idcontainer,idMsg);
         input.style.border='2px solid #32CD32';//green
+       
         return true;
     } else {
         // the input is empty
@@ -61,11 +71,8 @@ function checkStringLength( shortLimit, longerLimit, idInput) {
 
 function check(){
     let trigger = true;
-    if(checkStringLength(1,60,'title') && checkStringLength(1,60,'question') && checkStringLength(1,60,'trueAnswer')){}
+    if(checkStringLength(1,60,'title','titleMessage','titleContainer') && checkStringLength(1,60,'question','questionMessage','questionContainer') && checkStringLength(1,60,'trueAnswer','trueAnswerMessage', 'trueAnswerContainer')){}
 
-
-
-    let alseAnswersArray = document.getElementsByTagName('input');
 
     
 }

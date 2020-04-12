@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="">
-          <input type="button" name="submit" value="Créer">
+          <input type="button" name="submit" value="Créer" onclick="check()">
         </div>
 
     </main>
