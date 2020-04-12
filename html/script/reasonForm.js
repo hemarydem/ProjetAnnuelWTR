@@ -17,7 +17,6 @@ let tr = 0;
 
 //Creat the head of the table with in param an array of titles
 function printheadTable (array) {
-    console.log('printtable ok');
     
     // création table
     let table = document.createElement('table');
@@ -46,7 +45,6 @@ function printheadTable (array) {
 //this fucntion is linkt to the function printheadTable 
 // it will try to grab the tab create by printHeadTable
 function addlineRepport(array, numtr, strPath) {
-    console.log('addTable report ok');
     const arrayTd = [];
     let indexTd = 0;
     let indexTr = numtr;
@@ -58,15 +56,10 @@ function addlineRepport(array, numtr, strPath) {
      table.appendChild(newTR);
 
     //each loop create a column
-    console.log(array);
      for(let tabColum = 0; tabColum < array.length ; tabColum++) {
-         console.log(tabColum);
             arrayTd[indexTd] = document.createElement('td');
             arrayTd[indexTd].innerHTML = (array[tabColum]);
-            //to put an id only on id colum
-            if(tabColum == 0) {
-                arrayTd[indexTd].id = numtr;
-            }
+            if(tabColum == 0) arrayTd[indexTd].id = numtr*10;
             let elemetDaddy = document.getElementById(indexTr);
             elemetDaddy.appendChild(arrayTd[indexTd]);
             indexTd++;
@@ -95,7 +88,6 @@ function displayReason() {
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200) {
-                console.log(request.responseText);
                 
                 let ObjJson = JSON.parse(request.responseText);
                 let trigger = 0;
@@ -172,7 +164,12 @@ function checkInputReason(){
 }
 
 function suppReason(idstr) {
-    let idReason = document.getElementById(idstr);
+    console.log('ok :)');
+    
+    idstr *= 10;
+    let idReason = document.getElementById(idstr).innerHTML;
+    console.log(idReason);
+    idReason %= 10;
     let request = new XMLHttpRequest();
     request.open("POST", "reportCreatReasonProcess.php?option=" + 2, true);
     request.onreadystatechange = function() {
