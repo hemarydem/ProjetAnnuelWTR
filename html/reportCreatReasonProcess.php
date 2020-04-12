@@ -1,15 +1,12 @@
 <?php
     include('includes/config.php');
 
-    if(isset($_GET['option']) && $_GET['option'] == 1) {
-         //___________check the value of user's moderator____________\\
+    if(isset($_GET['option']) && $_GET['option'] == 2) {
+         //___________searche all reasons____________\\
          $q = 'SELECT reason  FROM REPORTREASON';
          $req = $bdd->prepare($q);
-         $req->execute(['idUser' => $idUser]);
+         $req->execute([]);
          $result = $req->fetch(PDO::FETCH_ASSOC);
-         $result = $result['moderator'];
-        
+         echo json_encode($result);
     }
-
-
 ?>
