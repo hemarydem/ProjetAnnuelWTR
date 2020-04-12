@@ -5,6 +5,9 @@ if(displayTrigger == 0) {
     displayTrigger++;
 }
 
+let CircleShort = document.getElementById('shorter');
+let circleLonger = document.getElementById('longer');
+
 //listen the input each tipe somthing is type
 const reasonInput = document.getElementById('newReason');
 reasonInput.addEventListener('input',checkInputReason());
@@ -44,7 +47,6 @@ function printheadTable (array) {
 // it will try to grab the tab create by printHeadTable
 function addlineRepport(array, numtr, strPath) {
     console.log('addTable report ok');
-
     const arrayTd = [];
     let indexTd = 0;
     let indexTr = numtr;
@@ -58,12 +60,29 @@ function addlineRepport(array, numtr, strPath) {
     //each loop create a column
     console.log(array);
      for(let tabColum = 0; tabColum < array.length ; tabColum++) {
-
+         console.log(tabColum);
             arrayTd[indexTd] = document.createElement('td');
             arrayTd[indexTd].innerHTML = (array[tabColum]);
+            //to put an id only on id colum
+            if(tabColum == 0) {
+                arrayTd[indexTd].id = numtr;
+            }
             let elemetDaddy = document.getElementById(indexTr);
             elemetDaddy.appendChild(arrayTd[indexTd]);
             indexTd++;
+            if( tabColum > 0 ) {
+                //creat the link for supp reason
+                let arryInput = [];
+                indexInput = 0;
+                arrayTd[indexTd] = document.createElement('td');
+                document.getElementById(indexTr).appendChild(arrayTd[indexTd]);
+                arryInput[indexInput] = document.createElement('button');
+                arryInput[indexInput].setAttribute("onclick", "suppReason("+numtr+")");
+                arryInput[indexInput].id = numtr;
+                //arryInput[indexInput].href = strPath +'?idReason=' +array[0] + '&option=' + 3;//'reporthandling.php?topic=' + array[array.length - 2] + '&reporter=' + array[array.length - 1];
+                arryInput[indexInput].innerHTML = 'supprimer';
+                document.getElementById(indexTr).appendChild(arryInput[indexInput]);
+           }
      }
 }
 
@@ -76,6 +95,8 @@ function displayReason() {
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200) {
+                console.log(request.responseText);
+                
                 let ObjJson = JSON.parse(request.responseText);
                 let trigger = 0;
                 
@@ -91,7 +112,7 @@ function displayReason() {
                         printheadTable (title);
                         trigger++;
                     }
-                    addlineRepport(array, tr);
+                    addlineRepport(array, tr, 'reportCreatReasonProcess.php');
                     tr++;
                 });
             } else {
@@ -129,7 +150,6 @@ function checkStringLength(string, shortLimit, longerLimit) {
         return false;
     }
 }
-
 //launch http request to creat the new reason
 function addReason(strReason) {
     let request = new XMLHttpRequest();
@@ -144,10 +164,26 @@ function addReason(strReason) {
         }
     }
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    request.send(`reason=${strReason}&option=${1}`);
+    request.send(`newReason=${strReason}&option=${1}`);
 }
 
 function checkInputReason(){
     if(checkStringLength(reasonInput,1,100))addReason(reasonInput.value);
 }
 
+function suppReason(idstr) {
+    let idReason = document.getElementById(idstr);
+    let request = new XMLHttpRequest();
+    request.open("POST", "reportCreatReasonProcess.php?option=" + 2, true);
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            if(request.status == 200) {
+                displayReason();
+            } else {
+                alert("Error: returned status code " + request.status + " " + request.statusText);
+            }
+        }
+    }
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`idReason=${idReason}&option=${3}`);
+}

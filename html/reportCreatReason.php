@@ -7,7 +7,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php include('includes/head.php'); ?>
+        <?php include('includes/head.php'); ?>
+        <link rel="stylesheet" type="text/css" href="style/css/creatLevel.css">
 	</head>
 	<body>
 		<?php
@@ -18,7 +19,7 @@
         
             <div id="formReason">
                 <input type="text" id="newReason">
-                <button onclick="addReason()">ajouté une raison</button>
+                <button onclick="checkInputReason()">ajouté une raison</button>
                 <div>
                     <div>
                         <p>trop court </p>
