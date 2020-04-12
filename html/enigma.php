@@ -1,9 +1,10 @@
 <?php
 session_start();
 	require('includes/config.php');
-    $req = $bdd ->prepare('SELECT FROM ENIGMA WHERE idEnigma = ?');
+    $req = $bdd ->prepare('SELECT idEnigma,title,description,question, trick FROM ENIGMA WHERE idEnigma = ?');
+        
     $req->execute([$_GET['id']]);
-    $result = $req->fetch(PDO::FETCH_ASSOC);
+    $results = $req->fetch(PDO::FETCH_ASSOC);
     echo '<!DOCTYPE html>
             <html lang="en" dir="ltr">
                 <head>';
@@ -17,17 +18,16 @@ session_start();
 
                         echo '<img src="img/enigma/defaultPicture.png" alt="logo enigma" height="180px"/>';
 
-                        echo "<div id =" . $results[$i]['idEnigma'] . " onclick=enigmaLink(". $i .")>";
 
-                        echo "<h1>" . $results[$i]['title'] . "</h1><br>";
-                        echo "<p>" . $results[$i]['description'] . "</p>";
-                        echo $results[$i]['mark'] == NULL ? 'Enigme inédite !': $results[$i]['mark'];
-                        echo '<p><a href="reportEnigmaForm.php?idEnigma=' . $results[$i]['idEnigma'] . '">Signaler</a></p>';
+                        echo "<h1>" . $results['title'] . "</h1><br>";
+                        echo "<p>" . $results['description'] . "</p>";
+                        echo "<h2>".$results['question']."</h2>";
+                        echo '<p><a href="reportEnigmaForm.php?idEnigma=' . $results["idEnigma"] . '">Signaler</a></p>';
                         echo "</div>";
 
                         echo "</section>";
                         ?>
-                        </main>
-                    <script src="script/selectIndex.js"></script>
-                </body>
-            </html>
+                    </main>
+                <script src="script/.js"></script>
+            </body>
+        </html>
