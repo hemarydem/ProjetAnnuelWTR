@@ -53,7 +53,7 @@
 
 				echo '<img src="img/enigma/defaultPicture.png" alt="logo enigma" height="180px"/>';
 
-				echo "<div>";
+				echo "<div id =" . $results[$i]['idEnigma'] . " onclick=enigmaLink(". $i .")>";
 
 					echo "<h1>" . $results[$i]['title'] . "</h1><br>";
 					echo "<p>" . $results[$i]['description'] . "</p>";
@@ -69,5 +69,6 @@
 
 
 		</main>
+		<script src="script/selectIndex.js"></script>
 	</body>
 </html>
