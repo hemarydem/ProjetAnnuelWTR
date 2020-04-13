@@ -10,8 +10,9 @@ function addinput(){
     suppbutton.id= 'suppbutton' + falseAnswerNb;
     suppbutton.innerHTML = 'Supp';
     suppbutton.onclick = function(){ suppAnswer( newInput.id, suppbutton.id ) };
-    
     container.appendChild(suppbutton);
+    let tank = document.getElementById('custId');
+    tank.value = parseInt(tank.value)++;
     falseAnswerNb++;
 }     
 
@@ -81,7 +82,20 @@ function check(){
 
 function addEngima() {
     let request = new XMLHttpRequest();
-    request.open("GET", "reportCreatReasonProcess.php?option=" + 2, true);
+    let allfalseAnswer = [];
+    let tankflaseAnswer = document.getElementById('custId').value;
+    let title = document.getElementById('title');
+    let description= document.getElementById('description');
+    let question = document.getElementById('question');
+    let trueAnswer = document.getElementById('trueAnswer');
+    let level = document.getElementById('level');
+    if( tankflaseAnswer > 1) {
+        for (let i = 2; i < tankflaseAnswer; i++) {
+            allfalseAnswer [i] = document.getElementById(i);
+        }
+    }
+    
+    request.open("POST", ".php", true);
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200) {

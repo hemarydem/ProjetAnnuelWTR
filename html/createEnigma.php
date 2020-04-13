@@ -68,7 +68,7 @@
     <footer>
       <?php include('includes/footer.php') ?>
     </footer>
-
+    <input type="hidden" id="custId" name="custId" value="1">
     <script src="script/creatEnigma.js"></script>
   </body>
 </html>
