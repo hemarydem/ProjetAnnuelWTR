@@ -80,6 +80,115 @@ function changeLogin() {
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send(`mail=${mail}&newLogin=${newLogin}`);
 }
+
+function addPoints() {
+	let points = document.getElementById('tankPoints').value;
+	if(points <=0 ){
+		alert('error must be upper than 0');
+		return false; 
+	}
+	console.log(points);
+	let request = new XMLHttpRequest();
+	request.open("POST", "profilAjaxProcess.php", true);   
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
+				console.log(request.response);
+				
+                let containeurPoints = document.getElementById('points');
+                containeurPoints.innerHTML = request.response; 
+			} else {
+				alert("Error: returned status code " + request.status + " " + request.statusText);
+			}
+		}
+	}
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`addPoints=${points}&mail=${mail}`);
+}
+function removePoints() {
+	let points = document.getElementById('tankPoints').value;
+	if(points <=0 ){
+		alert('error must be upper than 0 even to remove points');
+		return false;
+	}
+	console.log(points);
+	let request = new XMLHttpRequest();
+	request.open("POST", "profilAjaxProcess.php", true);   
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
+				console.log(request.response);
+				
+                let containeurPoints = document.getElementById('points');
+                containeurPoints.innerHTML = request.response; 
+			} else {
+				alert("Error: returned status code " + request.status + " " + request.statusText);
+			}
+		}
+	}
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`removePoints=${points}&mail=${mail}`);
+}
+function ChangeUserLevel() {
+	let newLevel = document.getElementById('levelSelected').value;
+	let request = new XMLHttpRequest();
+	request.open("POST", "profilAjaxProcess.php", true);   
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
+                let containeurPoints = document.getElementById('points');
+                containeurPoints.innerHTML = request.response; 
+			} else {
+				alert("Error: returned status code " + request.status + " " + request.statusText);
+			}
+		}
+	}
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`newUserLevel=${newLevel}&mail=${mail}`);
+}
+
+function banne() {
+	let days = document.getElementById('days').value;
+	console.log(typeof days);
+	if(typeof days == Number) {
+		days = (parseInt(days)*10)%10;
+		console.log('ok');
+		console.log(days);
+	}
+	let request = new XMLHttpRequest();
+	request.open("POST", "profilAjaxProcess.php", true);   
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
+				alert("l'utilisateur est plus bannie");
+				location.reload();
+			} else {
+				alert("Error: returned status code " + request.status + " " + request.statusText);
+			}
+		}
+	}
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`banneDays=${days}&mail=${mail}`);
+}
+
+function endBanne() {
+	let request = new XMLHttpRequest();
+	request.open("POST", "profilAjaxProcess.php", true);   
+	request.onreadystatechange = function() {
+		if(request.readyState == 4) {
+			if(request.status == 200) {
+				alert("l'utilisateur n'est plus bannie");
+				location.reload();
+			} else {
+				alert("Error: returned status code " + request.status + " " + request.statusText);
+			}
+		}
+	}
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`endBan=${1}&mail=${mail}`);
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 	 //-----------------------------for repporthandling.php----------------------------//

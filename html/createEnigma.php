@@ -25,7 +25,7 @@
             <input type="text" name="description" placeholder="Description">
             <input type="text" name="question" placeholder="Question">
             <input type="text" name="answer" placeholder="Réponse">
-            <select name="level">
+            <select name="levelSelected">
               <?php
                 //select the levels
                 $q = 'SELECT name FROM LEVEL';
