@@ -30,22 +30,49 @@ $datetime = date('Y-m-d');//for line 60
                     exit;
                 }
 
-                $q = 'SELECT USER.email, USER.login, USER.moderator, USER.active, USER.userLevel, USER.creationDate, USER.points, USER.FLAGBAN, USER.COUNTERBAN, LEVEL.name 
-                FROM USER 
-                INNER JOIN LEVEL ON  LEVEL.idLevel = USER.userLevel WHERE idUser=? ';
+                $q = 'SELECT USER.email, USER.login, USER.moderator, USER.active, USER.userLevel, USER.creationDate, USER.points, USER.FLAGBAN, USER.COUNTERBAN 
+                FROM USER
+                WHERE idUser=? ';
                 $req = $bdd->prepare($q);
                 $req->execute([ $idUser ]);
                 $results = $req->fetch(PDO::FETCH_ASSOC);
+
+                $q = '
+                    SELECT idLevel FROM LEVEL
+                    INNER JOIN USER ON USER.login = ?
+                    WHERE threshold <= USER.points
+                    ORDER BY threshold DESC
+                    LIMIT 1
+                ';
+                $req = $bdd->prepare($q);
+                $req->execute([ $results['login'] ]);
+                $Level = $req->fetch(PDO::FETCH_ASSOC)['idLevel'];
+                $q = '
+                    SELECT name FROM LEVEL
+                    INNER JOIN USER ON USER.login = ?
+                    WHERE threshold <= USER.points
+                    ORDER BY threshold DESC
+                    LIMIT 1
+                ';
+                $req = $bdd->prepare($q);
+                $req->execute([ $results['login'] ]);
+                $name = $req->fetch(PDO::FETCH_ASSOC)['name'];
 
 
 
                 
                 echo '<p>email: <p id="mail">' . $results['email'] .'</p><input id="newMail" type:"text" name ="newEmail" placeholder="nouvel email">' . '<button onclick="changeEmail()">change email</button></p> <br>';
-                echo '<p>login: <p id="login" >' . $results['login'] . '</p><input id="newLogin" type:"text" name ="newLogin" placeholder="nouveau pseudo"><button onclick="changeLogin()">change Login</button> </p> <br>';
+                echo '<div><p>login:</p> 
+                        <p id="login" >' . $results['login'] . '</p>
+                        <input id="newLogin" type:"text" name ="newLogin" placeholder="nouveau pseudo">
+                        <button onclick="changeLogin()">change Login</button>
+                    </div>
+                        <br>';
                 echo '<p>moderator: <p id="moderator">' . $results['moderator'] . ' </p> <button onclick="changeModerator()">change</button> </p> <br>';
                 echo '<p>active: <p id="active">' . $results['active'] . '</p> <button onclick="changeactive()">activate/desactive</button> </p> <br>';;
-                echo '<p>level: <p id="idlevel">' . $results['name'] . '</p> </p> <br>';
-                echo '<select name="level">';
+                echo '<p> id level: <p id="idlevel">' . $Level . '</p> </p> <br>';
+                echo '<p>  level: <p id="level">' . $name . '</p> </p> <br>';
+                echo '<select id="levelSelected">';
                 //select the levels
                 $q = 'SELECT name FROM LEVEL';
                 $req = $bdd->query($q);
