@@ -22,13 +22,13 @@ session_start();
                     echo $answerArray = $results['falseAnswers'];
                     $answerArray = spliter('|',$answerArray,0);
                     print_r($answerArray);
-                    $i=0;
+                    $i=1;
                     foreach ($answerArray as $key => $value) {
                         echo '<div id="'.$i.'" onclick="getAnwser('.$i.')">'.$value.'</div>';
                         $i++;
                     }
                         ?>
                         </main>
-                    <script src="script/enigmaScript.js"></script>
                 </body>
+                <script src="script/enigmaScript.js"></script>
             </html>

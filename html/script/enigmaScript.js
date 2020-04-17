@@ -22,3 +22,36 @@ function enigmaTrick() {
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send();
 }
+
+function getAnwser(idDiv) {
+    console.log(idDiv);
+    let enigmaId = document.location.search.split('?')[1].split('=')[1];
+    let answer = document.getElementById(idDiv).innerHTML;
+    console.log(answer);
+    let request = new XMLHttpRequest();  
+    request.open("POST", "enigmagetAnwserfunction.php", true); 
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            if(request.status == 200) {
+                let answerDive = document.getElementById(idDiv);
+                if(request.responseText == '1'){
+                    answerDive.style.backgroundColor = "green";
+                } else {
+                    answerDive.style.backgroundColor = "red";
+                }
+            } else {
+            alert("Error: returned status code " + request.status + " " + request.statusText);
+            }
+        }
+    }
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`answer=${answer}&id=${enigmaId}`);
+}
+
+let dat = new Date();
+dat;
+let date2 = new Date();
+date2;
+console.log(dat.getTime());
+console.log(date2.getTime());
+console.log(dat.getTime() == date2.getTime());
