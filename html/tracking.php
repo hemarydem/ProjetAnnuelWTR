@@ -76,32 +76,7 @@ if( !isset( $_SESSION['pseudo'] ) || $_SESSION['pseudo'] != 'administrateur' ){
           <div class="connectionPerDay">
             <h1>Nombre de connexions par jour</h1>
 
-            <table style="display: block;width: 400px;height: 300px; overflow: scroll;">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>connexions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-
-                  $q = 'SELECT CAST(dateConnection AS DATE) AS date, COUNT(idConnection) AS connections FROM CONNECTION GROUP BY date ORDER BY date DESC';
-                  $req = $bdd->query($q);
-                  $results = $req->fetchAll(PDO::FETCH_ASSOC);
-
-                  foreach ($results as $key => $value) {
-                    echo '
-                      <tr>
-                        <td> ' . $value['date'] . ' </td>
-                        <td> ' . $value['connections'] . ' </td>
-                      </tr>
-                    ';
-                  }
-
-                ?>
-              </tbody>
-            </table>
+            <canvas id="graphConnectionsPerDay"></canvas>
 
           </div>
         </section>
@@ -109,32 +84,7 @@ if( !isset( $_SESSION['pseudo'] ) || $_SESSION['pseudo'] != 'administrateur' ){
           <div class="enigmasPlayedPerDay">
             <h1>Nombre d'énigmes jouées par jour</h1>
 
-            <table style="display: block;width: 400px;height: 300px; overflow: scroll;">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>énigmes jouées</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-
-                  $q = 'SELECT CAST(datePlay AS DATE) AS date, COUNT(user) AS played FROM PLAY GROUP BY date ORDER BY date DESC';
-                  $req = $bdd->query($q);
-                  $results = $req->fetchAll(PDO::FETCH_ASSOC);
-
-                  foreach ($results as $key => $value) {
-                    echo '
-                      <tr>
-                        <td> ' . $value['date'] . ' </td>
-                        <td> ' . $value['played'] . ' </td>
-                      </tr>
-                    ';
-                  }
-
-                ?>
-              </tbody>
-            </table>
+            <canvas id="graphEnigmasPlayedPerDay"></canvas>
 
           </div>
         </section>
@@ -142,38 +92,17 @@ if( !isset( $_SESSION['pseudo'] ) || $_SESSION['pseudo'] != 'administrateur' ){
           <div class="enigmasSolvedPerDay">
             <h1>Nombre d'énigmes résolues par jour</h1>
 
-            <table style="display: block;width: 400px;height: 300px; overflow: scroll;">
-              <thead>
-                <tr>
-                  <th>nb d'énigmes résolues</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-
-                  $q = 'SELECT CAST(datePlay AS DATE) AS date, COUNT(user) AS played FROM PLAY WHERE solves = 1 GROUP BY date ORDER BY date DESC';
-                  $req = $bdd->query($q);
-                  $results = $req->fetchAll(PDO::FETCH_ASSOC);
-
-                  foreach ($results as $key => $value) {
-                    echo '
-                      <tr>
-                      <td> ' . $value['played'] . ' </td>
-                        <td> ' . $value['date'] . ' </td>
-                      </tr>
-                    ';
-                  }
-
-                ?>
-              </tbody>
-            </table>
+            <canvas id="graphEnigmasSolvedPerDay"></canvas>
 
           </div>
         </section>
     </main>
 
-    <script type="text/javascript" src="tracking/bestEnigmas.js"></script>
-    <script type="text/javascript" src="tracking/topPlayers.js"></script>
+    <script src="tracking/bestEnigmas.js"></script>
+    <script src="tracking/topPlayers.js"></script>
+    <script src="tracking/graphics.js"></script>
+    <script src='tracking/connectionPerDay.php'></script>
+    <script src="tracking/enigmasPlayedPerDay.php"></script>
+    <script src="tracking/enigmasSolvedPerDay.php"></script>
 </body>
 </html>
