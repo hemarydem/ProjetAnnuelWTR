@@ -189,7 +189,7 @@
 
     if(isset($_POST['newUserLevel'])) {
         //get the id of the new level
-        $q = 'SELECT idLevel FROM Level WHERE name = :nwlevel';
+        $q = 'SELECT threshold FROM Level WHERE name = :nwlevel';
         $req = $bdd->prepare($q);
         $req->execute([
             'nwlevel' => $_POST['newUserLevel']
@@ -197,21 +197,21 @@
         $result = $req->fetch(PDO::FETCH_ASSOC);
         
         //set the new level on the user's table
-        $q = 'UPDATE USER set Level = :nwlevel WHERE email = :mail';
+        $q = 'UPDATE USER set points = :nwlevel WHERE email = :mail';
         $req = $bdd->prepare($q);
         $req->execute([
-            'nwlevel' => $result['idLevel'],
+            'nwlevel' => $result['threshold'],
             'mail' => $_POST['mail']
         ]);
+
+        $array = [
+            'threshold' => $result['threshold'],
+            'newUserLevel' => $_POST['newUserLevel']
+        ];
+        header('Content-Type: application/json');
+        echo json_encode($array);
         
-        // get the user's level 
-        $q = 'SELECT USER.Level, LEVEL.name FROM USER WHERE email = :mail INNER JOIN LEVEL WHERE USER.userLevel = idLevel';
-        $req = $bdd->prepare($q);
-        $req->execute([
-            'mail' => $_POST['mail']
-        ]);
-        $result = $req->fetch(PDO::FETCH_ASSOC);
-        echo $result['name'];
+       // echo $_POST['newUserLevel'];
     }
 //--------------------ban-------------------------------//
     if(isset($_POST['banneDays']) && $_POST['banneDays'] > 0) {

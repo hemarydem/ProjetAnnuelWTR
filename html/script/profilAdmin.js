@@ -24,8 +24,14 @@ function changeModerator() {
 // this function change the status in bdd
 //turn on or turn of off by switching the data from 0 to 1 vice and versa
 function changeactive() {
-    let active = document.getElementById('active');
-    
+	let newtv = document.getElementById('model');
+	let newMarque= document.getElementById('brand');
+	let newTaill	= document.getElementById('size');
+	let newEcran	= document.getElementById('screen');
+	let newResolution	= document.getElementById('resolution');
+	let newPrix = document.getElementById('price');
+	let	newQuantity= document.getElementById('newQuantity');
+    		 		
 	let request = new XMLHttpRequest();
 	request.open("POST", "profilAjaxProcess.php", true);   
 	request.onreadystatechange = function() {
@@ -136,8 +142,13 @@ function ChangeUserLevel() {
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
-                let containeurPoints = document.getElementById('points');
-                containeurPoints.innerHTML = request.response; 
+				let containeurNamelevel = document.getElementById('level');
+				let containeurPointslevel = document.getElementById('points');
+				let ObjJson = JSON.parse(request.responseText);
+				console.log(ObjJson.newUserLevel + '\n');
+				console.log(ObjJson.threshold + '\n');
+				containeurNamelevel.innerHTML = ObjJson.newUserLevel; 
+				containeurPointslevel.innerHTML = ObjJson.threshold; 
 			} else {
 				alert("Error: returned status code " + request.status + " " + request.statusText);
 			}
