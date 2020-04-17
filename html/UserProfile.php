@@ -62,7 +62,12 @@ $datetime = date('Y-m-d');//for line 60
 
                 
                 echo '<p>email: <p id="mail">' . $results['email'] .'</p><input id="newMail" type:"text" name ="newEmail" placeholder="nouvel email">' . '<button onclick="changeEmail()">change email</button></p> <br>';
-                echo '<p>login: <p id="login" >' . $results['login'] . '</p><input id="newLogin" type:"text" name ="newLogin" placeholder="nouveau pseudo"><button onclick="changeLogin()">change Login</button> </p> <br>';
+                echo '<div><p>login:</p> 
+                        <p id="login" >' . $results['login'] . '</p>
+                        <input id="newLogin" type:"text" name ="newLogin" placeholder="nouveau pseudo">
+                        <button onclick="changeLogin()">change Login</button>
+                    </div>
+                        <br>';
                 echo '<p>moderator: <p id="moderator">' . $results['moderator'] . ' </p> <button onclick="changeModerator()">change</button> </p> <br>';
                 echo '<p>active: <p id="active">' . $results['active'] . '</p> <button onclick="changeactive()">activate/desactive</button> </p> <br>';;
                 echo '<p> id level: <p id="idlevel">' . $Level . '</p> </p> <br>';

@@ -16,9 +16,9 @@ session_start();
         <?php
         include('includes/adminHeader.php');
         ?>
-        <div id="searchingContaineur">
+        <div onload="searchUser()" id="searchingContaineur">
             <div > 
-                <input type ="text" name = "wantedUser" id="searchInput" placeholder="mail or pseudo's user">
+                <input type ="text" name = "wantedUser" id="searchInput" placeholder="mail or pseudo's user" value="">
             </div>
         <div id="mother">
         </div>

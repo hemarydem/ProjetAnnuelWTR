@@ -37,9 +37,7 @@ function changeactive() {
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
-                
                 active.innerHTML = request.response;
-                
 			} else {
 				alert("Error: returned status code " + request.status + " " + request.statusText);
 			}
@@ -51,14 +49,12 @@ function changeactive() {
 
 function changeEmail() {
     let newMail = document.getElementById('newMail').value;
-    
 	let request = new XMLHttpRequest();
 	request.open("POST", "profilAjaxProcess.php", true);   
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {                
                 document.location.href="UserProfile.php?email=" + newMail;
-                
 			} else {
 				alert("Error: returned status code " + request.status + " " + request.statusText);
 			}
@@ -69,7 +65,6 @@ function changeEmail() {
 }
 
 function changeLogin() {
-
     let newLogin = document.getElementById('newLogin').value;
 	let request = new XMLHttpRequest();
 	request.open("POST", "profilAjaxProcess.php", true);   
@@ -93,14 +88,11 @@ function addPoints() {
 		alert('error must be upper than 0');
 		return false; 
 	}
-	console.log(points);
 	let request = new XMLHttpRequest();
 	request.open("POST", "profilAjaxProcess.php", true);   
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
-				console.log(request.response);
-				
                 let containeurPoints = document.getElementById('points');
                 containeurPoints.innerHTML = request.response; 
 			} else {
@@ -117,14 +109,11 @@ function removePoints() {
 		alert('error must be upper than 0 even to remove points');
 		return false;
 	}
-	console.log(points);
 	let request = new XMLHttpRequest();
 	request.open("POST", "profilAjaxProcess.php", true);   
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
-				console.log(request.response);
-				
                 let containeurPoints = document.getElementById('points');
                 containeurPoints.innerHTML = request.response; 
 			} else {

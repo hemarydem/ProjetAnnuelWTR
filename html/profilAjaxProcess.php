@@ -115,26 +115,7 @@
         $result = $req->fetch(PDO::FETCH_ASSOC);
         echo $result['login'];
     }
-
-    if(isset($_POST['newLogin'])) {
-
-        if( strlen($_POST['newLogin']) < 5 || strlen($_POST['newLogin']) > 16 ){
-            echo 'error: Longueur invalide';
-            exit;
-        }
-
-        $q = 'UPDATE USER set login = :newLogin WHERE idUser = :idUser';
-        $req = $bdd->prepare($q);
-        $req->execute([
-            'newLogin' => $_POST['newLogin'],
-            'idUser' => $idUser
-        ]);
-        $q = 'SELECT login FROM USER WHERE idUser = ? AND login = ?';
-        $req = $bdd->prepare($q);
-        $req->execute( [$idUser, $_POST['newLogin'] ] );
-        $result = $req->fetch(PDO::FETCH_ASSOC);
-        echo $result['login'];
-    }
+    
     if(isset($_POST['addPoints']) && $_POST['addPoints'] > 0) {
 
         $q = 'SELECT points FROM USER WHERE email = :mail';
