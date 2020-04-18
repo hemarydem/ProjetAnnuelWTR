@@ -1,4 +1,4 @@
-let mins = 0;   
+let mins = 2;   
 //compute the seconds 
 let secs = mins * 60;
 //
