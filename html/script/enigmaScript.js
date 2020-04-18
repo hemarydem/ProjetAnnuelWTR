@@ -5,14 +5,11 @@ function enigmaTrick() {
      // to get the second element of the array
     let enigmaId = document.location.search.split('?')[1].split('=')[1];
     tricksBox = document.getElementById('tricksBox');
-    console.log(tricksBox);
     let request = new XMLHttpRequest();  
     request.open("GET", "enigmaEnigmaTrickfunction.php?id=" + enigmaId, true); 
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
-                
-                console.log(request.responseText);
                 tricksBox.innerHTML = request.responseText;
 			} else {
 				alert("Error: returned status code " + request.status + " " + request.statusText);
@@ -24,21 +21,16 @@ function enigmaTrick() {
 }
 
 function getAnwser(idDiv) {
-    console.log(idDiv);
     let enigmaId = document.location.search.split('?')[1].split('=')[1];
     let answer = document.getElementById(idDiv).innerHTML;
-    console.log(answer);
+    let timerMinutes = document.getElementById('minutes').value;
+    let timerSeconds = document.getElementById('seconds').value;
     let request = new XMLHttpRequest();  
     request.open("POST", "enigmagetAnwserfunction.php", true); 
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200) {
-                let answerDive = document.getElementById(idDiv);
-                if(request.responseText == '1'){
-                    answerDive.style.backgroundColor = "green";
-                } else {
-                    answerDive.style.backgroundColor = "red";
-                }
+                ValidatorAnswer(request.responseText, idDiv,timerMinutes,timerSeconds);
             } else {
             alert("Error: returned status code " + request.status + " " + request.statusText);
             }
@@ -48,10 +40,19 @@ function getAnwser(idDiv) {
     request.send(`answer=${answer}&id=${enigmaId}`);
 }
 
-let dat = new Date();
-dat;
-let date2 = new Date();
-date2;
-console.log(dat.getTime());
-console.log(date2.getTime());
-console.log(dat.getTime() == date2.getTime());
+/////// function synchrone//////
+function ValidatorAnswer(resulstAnsw, AnswerElementId,minutes,seconds) { // en hommag à bouba
+    let answerDive = document.getElementById(AnswerElementId);
+    if(minutes.value > 0 && seconds.value > 0){
+        if(resulstAnsw == '1'){
+            answerDive.style.backgroundColor = "green";
+        } else {
+            answerDive.style.backgroundColor = "red";
+        }
+    }else{
+        answerDive.style.backgroundColor = "red";
+        alert("trop tard le timer est terminé")
+        ////function echec
+        ///redirection page echec
+    }
+}

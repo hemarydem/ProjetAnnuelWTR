@@ -29,8 +29,10 @@ session_start();
                     echo '<button onclick="enigmaTrick()">indice</button>';
                     echo '<div id="tricksBox"> </div>';
                     echo '<main>';
-                    echo $answerArray = $results['falseAnswers'];
+                    $answerArray = $results['falseAnswers'];
                     $answerArray = spliter('|',$answerArray,0);
+                    array_push($answerArray,$results['answer']);
+                    shuffle($answerArray);
                     print_r($answerArray);
                     $i=1;
                     foreach ($answerArray as $key => $value) {
@@ -41,4 +43,5 @@ session_start();
                         </main>
                 </body>
                 <script src="script/enigmaScript.js"></script>
+                <script src="script/enigmaTimer.js"></script>
             </html>
