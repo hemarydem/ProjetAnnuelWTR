@@ -11,9 +11,19 @@ session_start();
                 echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">';
                 include('includes/head.php'); 
                 echo '</head>
-                <body>';
+                <body onload="countdown();">';
                     include('includes/header.php');
                     echo'<h1>'.$results['title'].'</h1>'; 
+                    echo '<div> 
+                            Time Left :: 
+                            <input id="minutes" type="text" style="width: 10px; 
+                            border: none; font-size: 16px;  
+                            font-weight: bold; color: black;">
+                            <font size="5"> : </font> 
+                            <input id="seconds" type="text" style="width: 20px; 
+                            border: none; font-size: 16px; 
+                            font-weight: bold; color: black;"> 
+                        </div> ';
                     echo '<p>'.$results['description'].'</p>';
                     echo '<h2>'.$results['question'].'</h2>';
                     echo '<button onclick="enigmaTrick()">indice</button>';
