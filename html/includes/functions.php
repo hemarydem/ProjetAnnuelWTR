@@ -32,4 +32,99 @@ function spliter($cutParam, $str, $limit) {
     }
     return $array;
 }
+
+function isTooLate($timeOld, $timeNow) {
+    if($timeNow > $timeOld) { 
+        return true;
+    }
+    return false;
+}
+
+/// funtcion do a select from in param  it return an array or false if it wont work
+// $arrayColunm => [ id, point,] /
+// $table=> table name
+// $condition is tring like 'points > 0'
+//$ArrayForCondition => [$_Get['id'], $time]
+//database set the variable where pdo was set like $bdd
+function doSelelctFromFAll($arrayColunm, $table, $condition, $ArrayForCondition,$dataBase) {
+    //build the string for the column
+    $colunm  = '';
+    for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+        $colunm = $colunm . ', '. $arrayColunm[$i];
+    }
+    $dataForExecute = '';
+    for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
+        $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+    }
+    $q = 'SELECT '. $colunm . ' FROM ' . $table . ' WHERE '.$condition;
+    $req = $dataBase ->prepare($q);
+    $req->execute([$dataForExecute]);
+    $results = $req->fetchAll(PDO::FETCH_ASSOC);
+    if(sizeof($results) > 0) {
+        return $results;
+    }
+    return false;
+}
+
+/// funtcion do a select from in param it return an array or false if it wont work
+// $arrayColunm => [ id, point,] /
+// $table=> table name
+// $condition is tring like 'points > 0'
+//$ArrayForCondition => [$_Get['id'], $time]
+//database set the variable where pdo was set like $bdd
+function doSelelctFromFetch($arrayColunm, $table, $condition, $ArrayForCondition,$dataBase) {
+    $colunm  = '';
+    for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+        $colunm = $colunm . ', '. $arrayColunm[$i];
+    }
+    $dataForExecute = '';
+    for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
+        $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+    }
+    $q = 'SELECT '. $colunm . ' FROM ' . $table . ' WHERE '.$condition;
+    $req = $dataBase ->prepare($q);
+    $req->execute([$dataForExecute]);
+    $results = $req->fetch(PDO::FETCH_ASSOC);
+    if(sizeof($results) > 0) {
+        return $results;
+    }
+    return false;
+}
+
+// its the same function as fuction doSelelctFromFetch
+//it return only a boolan true if the line existing
+// false if don't
+function existingInbdd($arrayColunm, $table, $condition, $ArrayForCondition,$dataBase) {
+    $colunm  = '';
+    for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+        $colunm = $colunm . ', '. $arrayColunm[$i];
+    }
+    $dataForExecute = '';
+    for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
+        $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+    }
+    $q = 'SELECT '. $colunm . ' FROM ' . $table . ' WHERE '.$condition;
+    $req = $dataBase ->prepare($q);
+    $req->execute([$dataForExecute]);
+    $results = $req->fetch(PDO::FETCH_ASSOC);
+    if(sizeof($results) > 0) {
+        return true;
+    }
+    return false;
+}
+
+function NoCondiSelectFrom($arrayColunm, $table,$dataBase) {
+    $colunm  = '';
+    for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+        $colunm = $colunm . ', '. $arrayColunm[$i];
+    }
+    $q = 'SELECT '. $colunm . ' FROM ' . $table ;
+    $req = $dataBase ->prepare($q);
+    $req->execute([]);
+    $results = $req->fetch(PDO::FETCH_ASSOC);
+    if(sizeof($results) > 0) {
+        return $results;
+    }
+    return false;
+}
 ?>

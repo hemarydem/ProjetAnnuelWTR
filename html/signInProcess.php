@@ -25,6 +25,7 @@
 		if( $results['active'] == 1){	//activé
 			session_start();
 			$_SESSION['pseudo'] = $login;
+			$_SESSION['id'] = $idUser;
 
 			//connection
 			$datetime = date('Y-m-d H:i:s');

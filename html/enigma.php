@@ -2,6 +2,13 @@
 session_start();
     require('includes/config.php');
     require('includes/functions.php');
+    //$nowTime = DateTime('"D-d-M, H:i:s') ;
+   echo $today = date("Y-m-d H:i:s");
+   if(existingInbdd(['*'], 'play', ['datePlay = ?','AND enigma = ?',' AND user = ?'], [$today,$_GET['id'],$_SESSION['id'] ],$bdd)){
+        doSelelctFromFetch(['MIN(datePlay)'], 'PLAY', ['datePlay = ?','AND enigma = ?',' AND user = ?'], [$_GET['id'], $_SESSION['id']],$bdd);
+   }
+    
+
     $req = $bdd ->prepare('SELECT*FROM ENIGMA WHERE idEnigma = ?');
     $req->execute([$_GET['id']]);
     $results = $req->fetch(PDO::FETCH_ASSOC);
@@ -21,7 +28,6 @@ session_start();
                     echo '<main>';
                     echo $answerArray = $results['falseAnswers'];
                     $answerArray = spliter('|',$answerArray,0);
-                    print_r($answerArray);
                     $i=1;
                     foreach ($answerArray as $key => $value) {
                         echo '<div id="'.$i.'" onclick="getAnwser('.$i.')">'.$value.'</div>';
