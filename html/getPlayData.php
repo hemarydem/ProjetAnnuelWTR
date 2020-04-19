@@ -1,14 +1,7 @@
 <?php
-
-
-reportEnigmaForm.php?idEnigma=
-
-
-
-
     require('includes/config.php');
     require('includes/functions.php');
-//take to tim of loading page
+    //take to tim of loading page
     $today = date("Y-m-d H:i:s");
    
    $idenigma =strval($_GET['id']);
@@ -46,4 +39,5 @@ reportEnigmaForm.php?idEnigma=
         $$req->execute([$playerId, $idenigma,$today]);
         $_SESSION['time'] = 2;
     }
+    header('location : enigma?php?id='.$idenigma);
 ?>
