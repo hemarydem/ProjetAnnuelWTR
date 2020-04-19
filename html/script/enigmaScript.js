@@ -48,10 +48,6 @@ function getAnwser(idDiv) {
     request.send(`answer=${answer}&id=${enigmaId}`);
 }
 
-let dat = new Date();
-dat;
-let date2 = new Date();
-date2;
-console.log(dat.getTime());
-console.log(date2.getTime());
-console.log(dat.getTime() == date2.getTime());
+function keepchronor(){
+    
+}

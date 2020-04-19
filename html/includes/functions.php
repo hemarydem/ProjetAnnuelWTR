@@ -112,9 +112,11 @@ function doSelelctFromFetch($arrayColunm, $table, $condition, $ArrayForCondition
 //it return only a boolan true if the line existing
 // false if don't
 function existingInbdd($arrayColunm, $table, $condition, $ArrayForCondition,$dataBase) {
-    $colunm  = '';
+    $colunm ='';
+    print_r($ArrayForCondition);
     if( sizeof($arrayColunm) > 1){
-         for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+        $colunm = $arrayColunm[0];
+         for ($i = 1; $i < sizeof($arrayColunm) ; $i++) { 
              $colunm = $colunm . ', '. $arrayColunm[$i];
          }
     }else{
@@ -122,12 +124,21 @@ function existingInbdd($arrayColunm, $table, $condition, $ArrayForCondition,$dat
     }
     $dataForExecute = '';
     if( sizeof($ArrayForCondition) > 1){ 
-         for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
-             $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+        echo $dataForExecute = $ArrayForCondition[0];
+         for ($i = 1; $i < sizeof($ArrayForCondition) ; $i++) { 
+             echo $i;
+             echo '<br>';
+           echo  $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+           echo '<br>';
+           echo '<br>';
          }
     }else{
-         $dataForExecute = $ArrayForCondition[0];
+        echo $dataForExecute = $ArrayForCondition[0];
+        echo '<br>';
     }
+
+    echo $dataForExecute;
+        echo '<br>';
     $q = 'SELECT '. $colunm . ' FROM ' . $table . ' WHERE '.$condition;
     $req = $dataBase ->prepare($q);
     $req->execute([$dataForExecute]);
@@ -156,4 +167,34 @@ function NoCondiSelectFrom($arrayColunm, $table,$dataBase) {
     }
     return false;
 }
+
+/*/function insert($tab, $arrayColunm, $arrayValues, $dataBase) {
+    $colunm  = '';
+    $condition = '';
+    if( sizeof($arrayColunm) > 1){
+         for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+             $colunm = $colunm . ', '. $arrayColunm[$i];
+             $condition = $condition.' AND '.$arrayColunm[0].' = ?';
+         }
+    }else{
+         $colunm = $arrayColunm[0];
+         $condition = $arrayColunm[0].' = ?';
+    }
+    $dataForExecute = '';
+    if( sizeof($arrayValues) > 1){ 
+         for ($i = 0; $i < sizeof($arrayValues) ; $i++) { 
+             $dataForExecute = $dataForExecute . ', '. $arrayValues[$i];
+         }
+    }else{
+         $dataForExecute = $arrayValues[0];
+    }
+
+    $q = 'INSERT INTO '.$tab.' ('. $colunm . ') ' .'VALUES (' . $dataForExecute . ')' ;
+    $req = $dataBase ->prepare($q);
+    $req->execute([]);
+
+    existingInbdd($arrayColunm, $tab, $condition, $dataForExecute,$dataBase)
+
+}/*/
+
 ?>

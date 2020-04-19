@@ -2,13 +2,38 @@
 session_start();
     require('includes/config.php');
     require('includes/functions.php');
-    //$nowTime = DateTime('"D-d-M, H:i:s') ;
-   echo $today = date("Y-m-d H:i:s");
-   if(existingInbdd(['*'], 'play', ['datePlay = ?','AND enigma = ?',' AND user = ?'], [$today,$_GET['id'],$_SESSION['id'] ],$bdd)){
-        doSelelctFromFetch(['MIN(datePlay)'], 'PLAY', ['datePlay = ?','AND enigma = ?',' AND user = ?'], [$_GET['id'], $_SESSION['id']],$bdd);
-   }
-    
+    //take to tim of loading page
+    $today = date("Y-m-d H:i:s");
+   
+   $idenigma =strval($_GET['id']);
+   $playerId = strval($_SESSION['id']);
 
+   //check if the play alraydy played this enigma
+    $q = 'SELECT * FROM Play WHERE enigma = ?  AND user = ?';
+    $req = $bdd->prepare($q);
+    $req->execute([ $idenigma, $playerId]);
+    $results = $req->fetch(PDO::FETCH_ASSOC);
+    
+    if($results) {
+        // if yes check when was last time
+        $q = 'SELECT MIN(datePlay) FROM Play WHERE enigma = ?  AND user = ?';
+        $req = $bdd->prepare($q);
+        $$req->execute([ $idenigma, $playerId]);
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+        // if yes check when was last time was urly than 2 he is doint the enimga
+        // he have to wait a cooldown of 5 min
+        if($today - $lastTimePLayed['datePlay'] > 60 * 2 && $today - $lastTimePLayed['datePlay'] < 5*60 ) {
+            header('locacation :index.php');
+        }else{
+            $q = 'INSERT INTO play(user,enigma,datePlay) VALUES ( :user, :enigma, :date )';
+            $req = $bdd->prepare($q);
+            $$req->execute([$playerId, $idenigma,$today]);
+        }
+    }else{
+        $q = 'INSERT INTO play(user,enigma,datePlay) VALUES ( :user, :enigma, :date )';
+        $req = $bdd->prepare($q);
+        $$req->execute([$playerId, $idenigma,$today]);
+    }
     $req = $bdd ->prepare('SELECT*FROM ENIGMA WHERE idEnigma = ?');
     $req->execute([$_GET['id']]);
     $results = $req->fetch(PDO::FETCH_ASSOC);
