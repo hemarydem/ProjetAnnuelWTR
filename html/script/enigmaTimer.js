@@ -1,7 +1,10 @@
-let mins = 2;   
-//compute the seconds 
-let secs = mins * 60;
-//
+let mins = document.getElementById('minutes');
+if(mins > 0){
+    let secs = mins * 60;
+}else {
+    let secs = document.getElementById('seconds')
+}   
+
 function countdown() { 
     setTimeout('Decrement()', 60); 
 }

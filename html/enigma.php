@@ -2,6 +2,16 @@
 session_start();
     require('includes/config.php');
     require('includes/functions.php');
+    $today = date("Y-m-d H:i:s");
+    $idenigma =strval($_GET['id']);
+    $playerId = strval($_SESSION['id']);
+
+    $q = 'SELECT MIN(datePlay) FROM Play WHERE enigma = ?  AND user = ?';
+    $req = $bdd->prepare($q);
+    $$req->execute([ $idenigma, $playerId]);
+    $result = $req->fetch(PDO::FETCH_ASSOC);
+
+    $_SESSION['time'] = strtotime($today) - strtotime($result['datePlay']);
   
     $req = $bdd ->prepare('SELECT*FROM ENIGMA WHERE idEnigma = ?');
     $req->execute([$_GET['id']]);
