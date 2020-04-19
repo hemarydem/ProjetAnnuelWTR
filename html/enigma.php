@@ -15,24 +15,31 @@ session_start();
     $results = $req->fetch(PDO::FETCH_ASSOC);
     
     if($results) {
+
         // if yes check when was last time
         $q = 'SELECT MIN(datePlay) FROM Play WHERE enigma = ?  AND user = ?';
         $req = $bdd->prepare($q);
         $$req->execute([ $idenigma, $playerId]);
         $result = $req->fetch(PDO::FETCH_ASSOC);
+
         // if yes check when was last time was urly than 2 he is doint the enimga
         // he have to wait a cooldown of 5 min
+        // more than 2mins                                      less than 5 min
         if($today - $lastTimePLayed['datePlay'] > 60 * 2 && $today - $lastTimePLayed['datePlay'] < 5*60 ) {
             header('locacation :index.php');
+
         }else{
+
             $q = 'INSERT INTO play(user,enigma,datePlay) VALUES ( :user, :enigma, :date )';
             $req = $bdd->prepare($q);
             $$req->execute([$playerId, $idenigma,$today]);
         }
-    }else{
+
+    }else { //if he never player this enigma or if its a new try
         $q = 'INSERT INTO play(user,enigma,datePlay) VALUES ( :user, :enigma, :date )';
         $req = $bdd->prepare($q);
         $$req->execute([$playerId, $idenigma,$today]);
+        $_SESSION['time'] = 2;
     }
     $req = $bdd ->prepare('SELECT*FROM ENIGMA WHERE idEnigma = ?');
     $req->execute([$_GET['id']]);
@@ -45,7 +52,17 @@ session_start();
                 echo '</head>
                 <body>';
                     include('includes/header.php');
-                    echo'<h1>'.$results['title'].'</h1>'; 
+                    echo'<h1>' . $results['title'] . '</h1>';
+                    echo '<div> 
+                            Time Left :: 
+                            <input id="minutes" type="text" value="' . $_SESSION['time'] . '" style="width: 10px; 
+                            border: none; font-size: 16px;  
+                            font-weight: bold; color: black;">
+                            <font size="5"> : </font> 
+                            <input id="seconds" type="text" style="width: 20px; 
+                            border: none; font-size: 16px; 
+                            font-weight: bold; color: black;"> 
+                        </div> '; 
                     echo '<p>'.$results['description'].'</p>';
                     echo '<h2>'.$results['question'].'</h2>';
                     echo '<button onclick="enigmaTrick()">indice</button>';
