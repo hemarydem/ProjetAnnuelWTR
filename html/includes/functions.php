@@ -49,22 +49,31 @@ function isTooLate($timeOld, $timeNow) {
 function doSelelctFromFAll($arrayColunm, $table, $condition, $ArrayForCondition,$dataBase) {
     //build the string for the column
     $colunm  = '';
-    for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
-        $colunm = $colunm . ', '. $arrayColunm[$i];
+    if( sizeof($arrayColunm) > 1){
+         for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+             $colunm = $colunm . ', '. $arrayColunm[$i];
+         }
+    }else{
+         $colunm = $arrayColunm[0];
     }
     $dataForExecute = '';
-    for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
-        $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+    if( sizeof($ArrayForCondition) > 1){ 
+         for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
+             $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+         }
+    }else{
+         $dataForExecute = $ArrayForCondition[0];
     }
-    $q = 'SELECT '. $colunm . ' FROM ' . $table . ' WHERE '.$condition;
-    $req = $dataBase ->prepare($q);
-    $req->execute([$dataForExecute]);
-    $results = $req->fetchAll(PDO::FETCH_ASSOC);
-    if(sizeof($results) > 0) {
-        return $results;
-    }
-    return false;
-}
+     $q = 'SELECT '. $colunm . ' FROM ' . $table . ' WHERE '.$condition;
+     $req = $dataBase ->prepare($q);
+     echo $dataForExecute;
+     $req->execute([$dataForExecute]);
+     $results = $req->fetchAll(PDO::FETCH_ASSOC);
+     if(sizeof($results) > 0) {
+         return $results;
+     }
+     return false;
+ }
 
 /// funtcion do a select from in param it return an array or false if it wont work
 // $arrayColunm => [ id, point,] /
@@ -74,12 +83,20 @@ function doSelelctFromFAll($arrayColunm, $table, $condition, $ArrayForCondition,
 //database set the variable where pdo was set like $bdd
 function doSelelctFromFetch($arrayColunm, $table, $condition, $ArrayForCondition,$dataBase) {
     $colunm  = '';
-    for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
-        $colunm = $colunm . ', '. $arrayColunm[$i];
+    if( sizeof($arrayColunm) > 1){
+         for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+             $colunm = $colunm . ', '. $arrayColunm[$i];
+         }
+    }else{
+         $colunm = $arrayColunm[0];
     }
     $dataForExecute = '';
-    for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
-        $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+    if( sizeof($ArrayForCondition) > 1){ 
+         for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
+             $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+         }
+    }else{
+         $dataForExecute = $ArrayForCondition[0];
     }
     $q = 'SELECT '. $colunm . ' FROM ' . $table . ' WHERE '.$condition;
     $req = $dataBase ->prepare($q);
@@ -96,12 +113,20 @@ function doSelelctFromFetch($arrayColunm, $table, $condition, $ArrayForCondition
 // false if don't
 function existingInbdd($arrayColunm, $table, $condition, $ArrayForCondition,$dataBase) {
     $colunm  = '';
-    for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
-        $colunm = $colunm . ', '. $arrayColunm[$i];
+    if( sizeof($arrayColunm) > 1){
+         for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+             $colunm = $colunm . ', '. $arrayColunm[$i];
+         }
+    }else{
+         $colunm = $arrayColunm[0];
     }
     $dataForExecute = '';
-    for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
-        $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+    if( sizeof($ArrayForCondition) > 1){ 
+         for ($i = 0; $i < sizeof($ArrayForCondition) ; $i++) { 
+             $dataForExecute = $dataForExecute . ', '. $ArrayForCondition[$i];
+         }
+    }else{
+         $dataForExecute = $ArrayForCondition[0];
     }
     $q = 'SELECT '. $colunm . ' FROM ' . $table . ' WHERE '.$condition;
     $req = $dataBase ->prepare($q);
@@ -115,8 +140,12 @@ function existingInbdd($arrayColunm, $table, $condition, $ArrayForCondition,$dat
 
 function NoCondiSelectFrom($arrayColunm, $table,$dataBase) {
     $colunm  = '';
-    for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
-        $colunm = $colunm . ', '. $arrayColunm[$i];
+    if( sizeof($arrayColunm) > 1){
+         for ($i = 0; $i < sizeof($arrayColunm) ; $i++) { 
+             $colunm = $colunm . ', '. $arrayColunm[$i];
+         }
+    }else{
+         $colunm = $arrayColunm[0];
     }
     $q = 'SELECT '. $colunm . ' FROM ' . $table ;
     $req = $dataBase ->prepare($q);
