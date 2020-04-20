@@ -6,12 +6,13 @@ session_start();
     $idenigma =strval($_GET['id']);
     $playerId = strval($_SESSION['id']);
 
-    $q = 'SELECT MIN(datePlay) FROM Play WHERE enigma = ?  AND user = ?';
+    $q = 'SELECT MAX(datePlay) as datePlay FROM Play WHERE enigma = ?  AND user = ?';
     $req = $bdd->prepare($q);
-    $$req->execute([ $idenigma, $playerId]);
+    $req->execute([ $idenigma, $playerId]);
     $result = $req->fetch(PDO::FETCH_ASSOC);
 
-    $_SESSION['time'] = strtotime($today) - strtotime($result['datePlay']);
+    //$_SESSION['time'] = strtotime(date('Y-m-d H:i:s')) - strtotime($result['datePlay']);
+    //echo $_SESSION['time'];exit;
   
     $req = $bdd ->prepare('SELECT*FROM ENIGMA WHERE idEnigma = ?');
     $req->execute([$_GET['id']]);
@@ -22,19 +23,19 @@ session_start();
                 echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">';
                 include('includes/head.php'); 
                 echo '</head>
-                <body>';
+                <body onload= "countdown()">';
                     include('includes/header.php');
                     echo'<h1>' . $results['title'] . '</h1>';
                     echo '<div> 
                             Time Left :: 
-                            <input id="minutes" type="text" value="' . $_SESSION['time'] . '" style="width: 10px; 
+                            <input id="minutes" type="text" style="width: 10px; 
                             border: none; font-size: 16px;  
-                            font-weight: bold; color: black;">
-                            <font size="5"> : </font> 
+                            font-weight: bold; color: black;"><font size="5"> : 
+                            </font> 
                             <input id="seconds" type="text" style="width: 20px; 
                             border: none; font-size: 16px; 
                             font-weight: bold; color: black;"> 
-                        </div> '; 
+                            </div>  '; 
                     echo '<p>'.$results['description'].'</p>';
                     echo '<h2>'.$results['question'].'</h2>';
                     echo '<button onclick="enigmaTrick()">indice</button>';
@@ -51,4 +52,5 @@ session_start();
                         </main>
                 </body>
                 <script src="script/enigmaScript.js"></script>
+                <script src="script/enigmaTimer.js"></script>
             </html>

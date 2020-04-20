@@ -14,7 +14,6 @@
     $req = $bdd->prepare($q);
     $req->execute([ $idenigma, $playerId]);
     $results = $req->fetch(PDO::FETCH_ASSOC);
-    print_r($results);    
     if($results) {
 
         // if yes check when was last time
@@ -22,14 +21,20 @@
         $req = $bdd->prepare($q);
         $req->execute([ $idenigma, $playerId]);
         $result = $req->fetch(PDO::FETCH_ASSOC);
-        echo $lastTimePLayed =$results['datePlay'];
+        $lastTimePLayed =$results['datePlay'];
         
-       echo date('Y-m-d H:i:s', strtotime($today. ' - '.$lastTimePLayed));
+       
+       $q1='SELECT Max(datePlay) FROM Play WHERE enigma = '.$idenigma.'  AND user = '.$playerId;
+       //a     -   b
+        $q ='SELECT TIMESTAMPDIFF(SECOND, ('.$q1.'), ?) AS time';
+        $req = $bdd->prepare($q);
+        $req->execute([$today]);
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+        echo date('H:i:s', $result['time']);
         // if yes check when was last time was urly than 2 he is doint the enimga
         // he have to wait a cooldown of 5 min
         // more than 2mins                                      less than 5 min
-        //if(strtotime($today) - strtotime($lastTimePLayed['datePlay']) > 60 * 2 && strtotime($today) - strtotime($lastTimePLayed['datePlay']) < 5*60 ) {
-            if( date('Y-m-d H:i:s', strtotime($today. ' - '.$lastTimePLayed)) > 60 * 2 &&  date('Y-m-d H:i:s', strtotime($today. ' - '.$lastTimePLayed)) < 5*60 ) {   
+            if( $result['time'] > 60 * 2 &&  $result['time'] < 5*60 ) {   
             header('locacation :index.php?=msg vous devez attendre la fin du cooddown');
         } else {
             $q = 'INSERT INTO play(user,enigma,datePlay) VALUES ( :user, :enigma, :date )';
@@ -53,6 +58,6 @@
             "date"=>$today]);
         $_SESSION['time'] = 2;
     }
-    header('location : enigma?php?id='.$idenigma);
+    header('location:enigma.php?id='.$idenigma);
     exit;
 ?>
