@@ -62,8 +62,8 @@ storage.setItem('timeMinutes', document.getElementById('minutes'));
               //faire la rediretion
             //  document.location.href = "index.php";
             console.log(document.location.hostname );
-            document.location.href = "https://" + document.location.hostname + "/index.php";
-
+            //document.location.href = "https://" + document.location.hostname + "/index.php";
+            document.location.href = "index.php";
           } 
           //if seconds > 0 then seconds is decremented 
           else { 

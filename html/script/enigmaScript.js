@@ -55,8 +55,7 @@ function getPoints() {
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200) {
-                //faire la eedirection
-                //document.location.href = "https://" + document.location.hostname + "/index.php";
+                document.location.href = "index.php";
             } else {
             alert("Error: returned status code " + request.status + " " + request.statusText);
             }
