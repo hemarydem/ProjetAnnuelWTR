@@ -4,8 +4,6 @@
     require('includes/functions.php');
     //take to tim of loading page
    $today = date("Y-m-d H:i:s");
-
-   
    $idenigma =strval($_GET['id']);
    $playerId = strval($_SESSION['id']);
     

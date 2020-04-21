@@ -48,13 +48,17 @@ function getAnwser(idDiv) {
 }
 
 function getPoints() {
-    let userId = document.getElementById('tanck');
+    let userId = document.getElementById('tanck').value;
     let enigmaId = document.location.search.split('?')[1].split('=')[1];
+    console.log(userId);
+    console.log(enigmaId);
     let request = new XMLHttpRequest();  
-    request.open("POST", "registerPoints.php", true); 
+    request.open("POST", "enigmagetPointsfunction.php", true); 
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200) {
+                console.log(request.responseText);
+                alert(request.responseText)
                 document.location.href = "index.php";
             } else {
             alert("Error: returned status code " + request.status + " " + request.statusText);

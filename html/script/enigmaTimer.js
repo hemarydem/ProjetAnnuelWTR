@@ -13,7 +13,7 @@ storage.setItem('timeMinutes', document.getElementById('minutes'));
 
 
   //set minutes 
-  var mins = 0; 
+  var mins = 2; 
   
   //calculate the seconds 
   var secs = mins * 60; 

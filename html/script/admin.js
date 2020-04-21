@@ -1,4 +1,4 @@
-
+searchUser();
 const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input',searchUser);
 

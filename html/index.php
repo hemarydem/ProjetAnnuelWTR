@@ -41,6 +41,7 @@
 			SELECT idEnigma,title,description,enigmaLevel, ROUND(AVG(PLAY.mark) ,1) AS mark FROM ENIGMA
 				LEFT JOIN PLAY ON enigma = idEnigma
 				WHERE enigmaLevel = ?
+				and active = 1
 				GROUP BY idEnigma
 				ORDER BY creationDate DESC
 			';
