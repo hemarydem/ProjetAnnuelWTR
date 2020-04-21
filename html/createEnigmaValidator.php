@@ -14,7 +14,6 @@ foreach ($_POST as $key => $value) {
   $_POST[$key] = trim( $_POST[$key] );
 }
 
-
 // Check the inputs
 if( !isset( $_POST['title'] ) || strlen($_POST['title']) < 1 || strlen($_POST['title']) > 60){
   echo 'Error title';
@@ -49,9 +48,19 @@ $result = $req->fetchAll(PDO::FETCH_ASSOC);
 if(count($result) != 1){
   header('Location:createEnigma.php?msg=Niveau inexistant');
   exit;
-
 }
 
+$level = $result[0]['idLevel'];
+
+
+$q = 'SELECT title FROM ENIGMA WHERE title = ?';
+$req = $bdd->prepare($q);
+$req->execute([$_POST['title']]);
+$result = $req->fetchAll(PDO::FETCH_ASSOC);
+if(count($result) > 0){
+  header('Location:createEnigma.php?msg=Titre déjà prit');
+  exit;
+}
 
 //image
 
@@ -82,7 +91,6 @@ $trick = $_POST['trick'];
 $gain = 100;
 $strFalseAnswers = $_POST['falseAnswer'];
 $creationDate = date('Y-m-d H:i:s');
-$level = $_POST['level'];
 
 $q = 'INSERT INTO ENIGMA(title,description,question,answer,trick,gain,author,creationDate,enigmaLevel) VALUES(:title,:description,:question,:answer,:trick,:gain,:author,:creationDate,:enigmaLevel)';
 $req = $bdd->prepare($q);
@@ -90,7 +98,8 @@ if($req == false){
   header('Location: createEnigma.php?msg=Erreur preparation');
   exit;
 }
-$req->execute([
+
+$success = $req->execute([
                 'title'       =>  $title,
                 'description' =>  $description,
                 'question'    =>  $question,
@@ -102,9 +111,37 @@ $req->execute([
                 'enigmaLevel' =>  $level
               ]);
 
+//télécharger l'image
+  //chemin d'enregistrement
+  $path = 'img/enigma/';
+  if(!file_exists($path)){
+    mkdir($path, 0777, true);
+  }
+  //récuperer l'id de l'énigme ajoutée
+  $q = 'SELECT idEnigma FROM ENIGMA WHERE author = ? ORDER BY creationDate DESC LIMIT 1';
+  $req = $bdd->prepare($q);
+  $req->execute([ $_SESSION['id'] ]);
+  $idEnigma = $req->fetch(PDO::FETCH_ASSOC)['idEnigma'];
 
+  //renomer l'image avec l'id de l'énigme et la date
+  $imagename = $_FILES['image']['name'];
+  $temp = explode('.', $imagename);
+  $extension = end($temp);
+  $timestamp = time();
+  $imagename = 'enigmaPicture-' . $idEnigma . '-' . $timestamp . '.' . $extension;
 
+  //déplacer l'image dans : img/enigma/
+  $path_image = $path . $imagename;
+  move_uploaded_file( $_FILES['image']['tmp_name'], $path_image );
 
+  //insérer le chemin dans la bdd
+  if($_FILES['image']['name'] != NULL){
+    $q = 'UPDATE ENIGMA SET profilePicture = ? WHERE idEnigma = ?';
+    $req = $bdd->prepare($q);
+    $req->execute([$imagename, $idEnigma]);
+  }
 
-
+  //rediction vers l'acceuil
+  header('Location: index.php');
+exit;
 ?>
