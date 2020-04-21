@@ -15,14 +15,16 @@
 							<li class="dropDown flex"> <a href="#">' . $_SESSION['pseudo'] . '</a>
 								<ul class="underList">
 									<li ><a href="#">Compte</a></li>
-									<li ><a href="signOut.php">Déconnexion</a></li>
-								</ul>
+									<li ><a href="signOut.php">Déconnexion</a></li>';
+									'<li ><a href="profil.php">profil</a></li>';
+									if( $_SESSION['pseudo'] == 'administrateur' ){
+										echo '<li><a href="admin.php">admin</a> </li>';		
+									};
+								echo'</ul>
 							</li>
 						
 						';
-						if( $_SESSION['pseudo'] == 'administrateur' ){
-							echo '<li><a href="admin.php">admin</a> </li>';		
-						}
+						
 					}else {
 						echo '<li><a href="signIn.php">Connexion</a></li>';
 						echo '<li><a href="signUp.php">Inscription</a></li>';
