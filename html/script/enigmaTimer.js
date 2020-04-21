@@ -13,7 +13,7 @@ storage.setItem('timeMinutes', document.getElementById('minutes'));
 
 
   //set minutes 
-  var mins = 2; 
+  var mins = 0; 
   
   //calculate the seconds 
   var secs = mins * 60; 
@@ -61,6 +61,9 @@ storage.setItem('timeMinutes', document.getElementById('minutes'));
               seconds.value = 0;
               //faire la rediretion
             //  document.location.href = "index.php";
+            console.log(document.location.hostname );
+            document.location.href = "https://" + document.location.hostname + "/index.php";
+
           } 
           //if seconds > 0 then seconds is decremented 
           else { 
