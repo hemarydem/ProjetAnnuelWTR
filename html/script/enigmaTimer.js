@@ -58,7 +58,9 @@ storage.setItem('timeMinutes', document.getElementById('minutes'));
           if (mins < 0) { 
               alert('time up'); 
               minutes.value = 0; 
-              seconds.value = 0; 
+              seconds.value = 0;
+              //faire la rediretion
+            //  document.location.href = "index.php";
           } 
           //if seconds > 0 then seconds is decremented 
           else { 

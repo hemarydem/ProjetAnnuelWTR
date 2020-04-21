@@ -5,7 +5,7 @@ session_start();
     $today = date("Y-m-d H:i:s");
     $idenigma =strval($_GET['id']);
     $playerId = strval($_SESSION['id']);
-
+    $trigger = false;
     $q = 'SELECT MAX(datePlay) as datePlay FROM Play WHERE enigma = ?  AND user = ?';
     $req = $bdd->prepare($q);
     $req->execute([ $idenigma, $playerId]);
@@ -24,6 +24,7 @@ session_start();
                 include('includes/head.php'); 
                 echo '</head>
                 <body onload= "countdown()">';
+                echo '<main>';
                     include('includes/header.php');
                     echo'<h1>' . $results['title'] . '</h1>';
                     echo '<div> 
@@ -40,14 +41,39 @@ session_start();
                     echo '<h2>'.$results['question'].'</h2>';
                     echo '<button onclick="enigmaTrick()">indice</button>';
                     echo '<div id="tricksBox"> </div>';
-                    echo '<main>';
-                    echo $answerArray = $results['falseAnswers'];
+                    $answerArray = $results['falseAnswers'];
                     $answerArray = spliter('|',$answerArray,0);
-                    $i=1;
+                    echo $results['answer'];
+                    array_push($answerArray,$results['answer']);
+                    shuffle($answerArray);
+                    $arrayDisplayAnsw = [];
+                    $i=0;
                     foreach ($answerArray as $key => $value) {
-                        echo '<div id="'.$i.'" onclick="getAnwser('.$i.')">'.$value.'</div>';
+                        $arrayDisplayAnsw[$i] = $value;
                         $i++;
                     }
+                    if(sizeof($arrayDisplayAnsw) <= 4) {
+                        $limit = sizeof($arrayDisplayAnsw);
+                    }else{
+                        $limit = 4;
+                        $trigger = true;
+                    }
+            
+                    echo '<div class="container">';
+                        echo '<div class="row">';
+                        for($i = 0; $i < $limit; $i++ ) {
+                            echo '<div class="col" id="'.$i.'" onclick="getAnwser('.$i.')">'.$arrayDisplayAnsw[$i].'</div>';
+                        }
+                        echo '</div>';
+                        if($trigger){
+                            echo '<div class="row">';
+                            for($i = $limit; $i < sizeof($arrayDisplayAnsw); $i++ ) {
+                                echo '<div class="col" id="'.$i.'" onclick="getAnwser('.$i.')">'.$arrayDisplayAnsw[$i].'</div>';
+                            }
+                        echo '</div>';
+                        }
+                    echo '</div>';
+                    echo'<input type="hidden" id="tanck" value="'.$_SESSION['id'].'">';
                         ?>
                         </main>
                 </body>

@@ -35,7 +35,7 @@
         // he have to wait a cooldown of 5 min
         // more than 2mins                                      less than 5 min
             if( $result['time'] > 60 * 2 &&  $result['time'] < 5*60 ) {   
-            header('locacation :index.php?=msg vous devez attendre la fin du cooddown');
+            header('location:index.php?msg=vous devez attendre la fin du cooddown');
         } else {
             $q = 'INSERT INTO play(user,enigma,datePlay) VALUES ( :user, :enigma, :date )';
             $req = $bdd->prepare($q);
@@ -50,8 +50,6 @@
     } else { //if he never player this enigma or if its a new try
         $q = 'INSERT INTO play(user,enigma,datePlay) VALUES ( :user, :enigma, :date )';
         $req = $bdd->prepare($q);
-        //$idenigma = (int)$_GET['id'];
-        //$playerId = (int)$_SESSION['id'];
         $req->execute([
             "user"=>$playerId,
             "enigma"=> $idenigma,

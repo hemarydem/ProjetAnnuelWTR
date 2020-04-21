@@ -11,7 +11,6 @@ function enigmaTrick() {
 	request.onreadystatechange = function() {
 		if(request.readyState == 4) {
 			if(request.status == 200) {
-                
                 console.log(request.responseText);
                 tricksBox.innerHTML = request.responseText;
 			} else {
@@ -27,7 +26,6 @@ function getAnwser(idDiv) {
     console.log(idDiv);
     let enigmaId = document.location.search.split('?')[1].split('=')[1];
     let answer = document.getElementById(idDiv).innerHTML;
-    console.log(answer);
     let request = new XMLHttpRequest();  
     request.open("POST", "enigmagetAnwserfunction.php", true); 
     request.onreadystatechange = function() {
@@ -36,6 +34,7 @@ function getAnwser(idDiv) {
                 let answerDive = document.getElementById(idDiv);
                 if(request.responseText == '1'){
                     answerDive.style.backgroundColor = "green";
+                    getPoints();
                 } else {
                     answerDive.style.backgroundColor = "red";
                 }
@@ -48,6 +47,21 @@ function getAnwser(idDiv) {
     request.send(`answer=${answer}&id=${enigmaId}`);
 }
 
-function keepchronor(){
-    
+function getPoints() {
+    let userId = document.getElementById('tanck');
+    let enigmaId = document.location.search.split('?')[1].split('=')[1];
+    let request = new XMLHttpRequest();  
+    request.open("POST", "registerPoints.php", true); 
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            if(request.status == 200) {
+                //faire la eedirection
+                document.location.href = "https://" + document.location.hostname + "/index.php";
+            } else {
+            alert("Error: returned status code " + request.status + " " + request.statusText);
+            }
+        }
+    }
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send(`idUser=${userId}&idEnigma=${enigmaId}`);
 }
