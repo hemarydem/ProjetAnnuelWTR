@@ -30,13 +30,13 @@
     ?>
 <body>
 <main>
-<h1><?php $_SESSION['pseudo'];?></h1>
-<?php
+<h1><?php echo  $_SESSION['pseudo'];?></h1>
+<?php  
 echo '<img src="'.$result['profilePicture'].'">';
 ?>
 <div>
 <h2>niveau</h2>
-<p><?php $Level ;?></p>
+<p><?php echo $Level ;?></p>
 </div>
 </main>    
 </body>

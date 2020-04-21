@@ -14,9 +14,8 @@
 
 							<li class="dropDown flex"> <a href="#">' . $_SESSION['pseudo'] . '</a>
 								<ul class="underList">
-									<li ><a href="#">Compte</a></li>
+									<li ><a href="profil.php">Compte</a></li>
 									<li ><a href="signOut.php">Déconnexion</a></li>';
-									'<li ><a href="profil.php">profil</a></li>';
 									if( $_SESSION['pseudo'] == 'administrateur' ){
 										echo '<li><a href="admin.php">admin</a> </li>';		
 									};
