@@ -10,6 +10,7 @@ function addInput(){
 
   const input = document.createElement('input');
   input.className = 'falseAnswer';
+  input.id = 'falseAnswer' + nbFalseAnswers;
   input.placeholder = 'Fausse réponse';
 
   const suppButton = document.createElement('button');
@@ -74,7 +75,7 @@ function check(){
     ){
     return false;
   }
-  
+
   const falseAnswer = document.getElementById('falseAnswer0');
   falseAnswer.value = strFalseAnswers;
   console.log(falseAnswer.value);
