@@ -1,4 +1,4 @@
 
 function enigmaLink(enigmaId){
-    document.location.href = "getPLayData.php?id=" + enigmaId.toString();
+    document.location.href = "getPlay.php?id=" + enigmaId.toString();
 }

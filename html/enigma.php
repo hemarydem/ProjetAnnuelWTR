@@ -3,18 +3,15 @@ session_start();
     require('includes/config.php');
     require('includes/functions.php');
     $today = date("Y-m-d H:i:s");
-    $idenigma =strval($_GET['id']);
-    $playerId = strval($_SESSION['id']);
+    if(isset($_GET['id'])){
+        $idenigma =strval($_GET['id']);
+    }
+    if($_SESSION['id']){
+        $playerId = strval($_SESSION['id']);
+    }
     $trigger = false;
-    $q = 'SELECT MAX(datePlay) as datePlay FROM Play WHERE enigma = ?  AND user = ?';
-    $req = $bdd->prepare($q);
-    $req->execute([ $idenigma, $playerId]);
-    $result = $req->fetch(PDO::FETCH_ASSOC);
-
-    //$_SESSION['time'] = strtotime(date('Y-m-d H:i:s')) - strtotime($result['datePlay']);
-    //echo $_SESSION['time'];exit;
   
-    $req = $bdd ->prepare('SELECT*FROM ENIGMA WHERE idEnigma = ?');
+    $req = $bdd ->prepare('SELECT title, description,  question, falseAnswers, answer FROM ENIGMA WHERE idEnigma = ?');
     $req->execute([$_GET['id']]);
     $results = $req->fetch(PDO::FETCH_ASSOC);
     echo '<!DOCTYPE html>

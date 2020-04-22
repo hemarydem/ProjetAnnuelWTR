@@ -42,7 +42,6 @@
                 'enigma' => $idenigma,
                 'date' =>$today
             ]);
-            $_SESSION['time'] = 2;
         }
 
     } else { //if he never player this enigma or if its a new try
